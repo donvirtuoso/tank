@@ -1,0 +1,232 @@
+{
+  "ui": {
+    "stepOf": { "vi": "Bước {current}/{total}", "en": "Step {current}/{total}" },
+    "back": { "vi": "Trước", "en": "Back" },
+    "next": { "vi": "Tiếp", "en": "Next" },
+    "finish": { "vi": "Hoàn thành", "en": "Finish" },
+    "reset": { "vi": "Làm lại", "en": "Reset" },
+    "close": { "vi": "Đóng", "en": "Close" },
+    "skip": { "vi": "Bỏ qua", "en": "Skip" },
+    "replayDemo": { "vi": "Xem lại minh hoạ", "en": "Replay demo" },
+    "stepDone": { "vi": "Đã hoàn thành bước này", "en": "Step completed" },
+    "waitSelection": { "vi": "Hãy chọn bộ phận được đánh dấu trên mô hình.", "en": "Select the highlighted part on the model." },
+    "waitAnimation": { "vi": "Hãy chạy animation được yêu cầu.", "en": "Play the requested animation." },
+    "waitExplodeOn": { "vi": "Hãy bật chế độ tách rời.", "en": "Turn on exploded view." },
+    "waitExplodeOff": { "vi": "Hãy tắt chế độ tách rời.", "en": "Turn off exploded view." },
+    "lessonComplete": { "vi": "Bạn đã hoàn thành bài học!", "en": "You have completed the lesson!" },
+    "lessonCompleteBody": {
+      "vi": "Tiến độ đã được lưu. Bạn có thể học lại bất cứ lúc nào.",
+      "en": "Your progress has been saved. You can retake the lesson at any time."
+    },
+    "restartLesson": { "vi": "Học lại", "en": "Restart lesson" },
+    "progressLabel": { "vi": "Tiến độ bài học", "en": "Lesson progress" },
+    "summaryTitle": { "vi": "Tóm tắt", "en": "Summary" },
+    "restartTutorial": { "vi": "Lắp ráp lại từ đầu", "en": "Restart assembly" },
+    "reopenOnboarding": { "vi": "Xem lại hướng dẫn ban đầu", "en": "Show welcome guide again" }
+  },
+  "onboarding": {
+    "pages": [
+      {
+        "id": "welcome",
+        "title": { "vi": "Chào mừng đến với Tank Explorer", "en": "Welcome to Tank Explorer" },
+        "content": {
+          "vi": "Khám phá cấu tạo xe tăng qua mô hình 3D tương tác, bài học từng bước và tutorial lắp ráp.",
+          "en": "Discover how a tank is built through an interactive 3D model, step-by-step lessons and an assembly tutorial."
+        }
+      },
+      {
+        "id": "mouse",
+        "title": { "vi": "Điều khiển bằng chuột", "en": "Mouse controls" },
+        "content": {
+          "vi": "Dùng chuột để quan sát mô hình từ mọi góc.",
+          "en": "Use your mouse to look at the model from every angle."
+        },
+        "controls": [
+          { "id": "rotate", "input": { "vi": "Kéo chuột trái", "en": "Left-drag" }, "action": { "vi": "Xoay góc nhìn", "en": "Orbit the camera" } },
+          { "id": "pan", "input": { "vi": "Kéo chuột phải", "en": "Right-drag" }, "action": { "vi": "Di chuyển góc nhìn", "en": "Pan the view" } },
+          { "id": "zoom", "input": { "vi": "Lăn chuột", "en": "Scroll wheel" }, "action": { "vi": "Phóng to / thu nhỏ", "en": "Zoom in / out" } },
+          { "id": "select", "input": { "vi": "Nhấp chuột trái", "en": "Left-click" }, "action": { "vi": "Chọn bộ phận", "en": "Select a part" } }
+        ]
+      },
+      {
+        "id": "explorer",
+        "title": { "vi": "Trình khám phá bộ phận", "en": "Component explorer" },
+        "content": {
+          "vi": "Danh sách bộ phận được đánh dấu giúp bạn tìm và chọn nhanh từng chi tiết của xe tăng.",
+          "en": "The highlighted component list lets you quickly find and select every part of the tank."
+        },
+        "highlight": "component-explorer"
+      }
+    ],
+    "startExplore": { "vi": "Bắt đầu khám phá", "en": "Start exploring" }
+  },
+  "lessons": [
+    {
+      "id": "tank-anatomy",
+      "title": { "vi": "Khám phá cấu tạo xe tăng", "en": "Explore the anatomy of a tank" },
+      "description": {
+        "vi": "Bài học 7 bước giới thiệu các bộ phận chính của xe tăng.",
+        "en": "A 7-step lesson introducing the main parts of a tank."
+      },
+      "steps": [
+        {
+          "id": "intro",
+          "title": { "vi": "Giới thiệu", "en": "Introduction" },
+          "content": {
+            "vi": "Xe tăng gồm ba khối chính: [[hull]], [[turret]] và hệ thống [[tracks]]. Nhấn \"Tiếp\" để bắt đầu.",
+            "en": "A tank has three main blocks: the [[hull]], the [[turret]] and the [[tracks]]. Press \"Next\" to begin."
+          },
+          "completion": { "event": "manual" }
+        },
+        {
+          "id": "select-hull",
+          "title": { "vi": "Thân xe", "en": "The hull" },
+          "content": {
+            "vi": "Chọn [[hull]] trên mô hình. Đây là phần được bọc [[armor]] dày nhất.",
+            "en": "Select the [[hull]] on the model. It carries the thickest [[armor]]."
+          },
+          "target": "hull",
+          "completion": { "event": "selection", "componentId": "hull" }
+        },
+        {
+          "id": "select-turret",
+          "title": { "vi": "Tháp pháo", "en": "The turret" },
+          "content": {
+            "vi": "Chọn [[turret]]. Tháp pháo nối với thân xe qua [[turret-ring]].",
+            "en": "Select the [[turret]]. It is joined to the hull by the [[turret-ring]]."
+          },
+          "target": "turret",
+          "completion": { "event": "selection", "componentId": "turret" }
+        },
+        {
+          "id": "turret-traverse",
+          "title": { "vi": "Xoay tháp pháo", "en": "Turret traverse" },
+          "content": {
+            "vi": "Chạy animation [[traverse]] để xem tháp pháo xoay 360°.",
+            "en": "Play the [[traverse]] animation to watch the turret rotate 360°."
+          },
+          "target": "turret",
+          "completion": { "event": "animation", "animationId": "turret-traverse" }
+        },
+        {
+          "id": "select-main-gun",
+          "title": { "vi": "Pháo chính", "en": "Main gun" },
+          "content": {
+            "vi": "Chọn [[main-gun]]. Sức mạnh của pháo phụ thuộc nhiều vào [[caliber]].",
+            "en": "Select the [[main-gun]]. Its power depends largely on its [[caliber]]."
+          },
+          "target": "main-gun",
+          "completion": { "event": "selection", "componentId": "main-gun" }
+        },
+        {
+          "id": "explode",
+          "title": { "vi": "Tách rời mô hình", "en": "Explode the model" },
+          "content": {
+            "vi": "Bật [[exploded-view]] để thấy các bộ phận bên trong.",
+            "en": "Turn on the [[exploded-view]] to reveal the internal parts."
+          },
+          "completion": { "event": "explode", "exploded": true }
+        },
+        {
+          "id": "select-powerpack",
+          "title": { "vi": "Cụm động lực", "en": "The powerpack" },
+          "content": {
+            "vi": "Trong chế độ tách rời, chọn [[powerpack]] – trái tim truyền lực tới [[sprocket]].",
+            "en": "In exploded view, select the [[powerpack]] – the heart that drives the [[sprocket]]."
+          },
+          "target": "powerpack",
+          "completion": { "event": "selection", "componentId": "powerpack" }
+        }
+      ]
+    }
+  ],
+  "assemblyTutorial": {
+    "id": "tank-assembly",
+    "title": { "vi": "Tutorial lắp ráp xe tăng", "en": "Tank assembly tutorial" },
+    "description": {
+      "vi": "Lắp ráp xe tăng từng bước từ thân xe tới pháo chính.",
+      "en": "Assemble the tank step by step, from the hull to the main gun."
+    },
+    "steps": [
+      {
+        "id": "hull",
+        "title": { "vi": "Đặt thân xe", "en": "Place the hull" },
+        "content": {
+          "vi": "Mọi bộ phận đều gắn vào [[hull]], vì vậy ta bắt đầu từ đây.",
+          "en": "Every part attaches to the [[hull]], so we start here."
+        },
+        "target": "hull",
+        "camera": { "position": [6, 4, 6], "target": [0, 0.5, 0] },
+        "animation": { "id": "assemble-hull" }
+      },
+      {
+        "id": "road-wheels",
+        "title": { "vi": "Lắp bánh chịu tải", "en": "Fit the road wheels" },
+        "content": {
+          "vi": "Gắn [[road-wheels]] và [[sprocket]] vào hai bên thân xe.",
+          "en": "Attach the [[road-wheels]] and the [[sprocket]] to both sides of the hull."
+        },
+        "target": "road-wheels",
+        "camera": { "position": [0, 1.5, 7], "target": [0, 0.3, 0] },
+        "animation": { "id": "assemble-road-wheels" }
+      },
+      {
+        "id": "tracks",
+        "title": { "vi": "Lắp xích", "en": "Fit the tracks" },
+        "content": {
+          "vi": "Quấn [[tracks]] quanh các bánh xe để hoàn thiện hệ thống di chuyển.",
+          "en": "Wrap the [[tracks]] around the wheels to complete the running gear."
+        },
+        "target": "tracks",
+        "camera": { "position": [5, 1, 5], "target": [0, 0.3, 0] },
+        "animation": { "id": "assemble-tracks" }
+      },
+      {
+        "id": "powerpack",
+        "title": { "vi": "Lắp cụm động lực", "en": "Install the powerpack" },
+        "content": {
+          "vi": "Hạ [[powerpack]] vào khoang phía sau thân xe.",
+          "en": "Lower the [[powerpack]] into the rear compartment of the hull."
+        },
+        "target": "powerpack",
+        "camera": { "position": [-6, 5, -3], "target": [0, 0.8, -1.5] },
+        "animation": { "id": "assemble-powerpack" }
+      },
+      {
+        "id": "turret",
+        "title": { "vi": "Lắp tháp pháo", "en": "Mount the turret" },
+        "content": {
+          "vi": "Đặt [[turret]] lên [[turret-ring]] trên nóc thân xe.",
+          "en": "Seat the [[turret]] on the [[turret-ring]] on top of the hull."
+        },
+        "target": "turret",
+        "camera": { "position": [4, 6, 4], "target": [0, 1.5, 0] },
+        "animation": { "id": "assemble-turret" }
+      },
+      {
+        "id": "main-gun",
+        "title": { "vi": "Lắp pháo chính", "en": "Attach the main gun" },
+        "content": {
+          "vi": "Gắn [[main-gun]] qua [[mantlet]] ở mặt trước tháp pháo.",
+          "en": "Fit the [[main-gun]] through the [[mantlet]] at the front of the turret."
+        },
+        "target": "main-gun",
+        "camera": { "position": [3, 2.5, 7], "target": [0, 1.6, 2] },
+        "animation": { "id": "assemble-main-gun" }
+      }
+    ],
+    "summary": {
+      "title": { "vi": "Hoàn tất lắp ráp!", "en": "Assembly complete!" },
+      "content": {
+        "vi": "Bạn đã lắp ráp xong xe tăng. Thứ tự lắp ráp đi từ khung chịu lực tới vũ khí:",
+        "en": "You have assembled the tank. The build order goes from the load-bearing frame to the weapon:"
+      },
+      "points": [
+        { "vi": "Thân xe là nền tảng cho mọi bộ phận.", "en": "The hull is the foundation for every part." },
+        { "vi": "Bánh chịu tải, bánh sao và xích tạo thành hệ thống di chuyển.", "en": "Road wheels, sprocket and tracks form the running gear." },
+        { "vi": "Cụm động lực cung cấp sức mạnh cho xe.", "en": "The powerpack provides the driving force." },
+        { "vi": "Tháp pháo và pháo chính được lắp sau cùng.", "en": "The turret and main gun are mounted last." }
+      ]
+    }
+  }
+}
