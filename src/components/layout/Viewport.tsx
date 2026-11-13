@@ -13,7 +13,11 @@ export default function Viewport() {
   const displayMode = useViewerStore((s) => s.displayMode);
 
   return (
-    <section aria-label={t.viewport.label} className="viewport-grid relative h-full w-full overflow-hidden">
+    <section
+      aria-label={t.viewport.label}
+      // Canvas 3D gắn trong vùng này sẽ được dùng để chụp thumbnail thiết kế.
+      data-design-thumbnail=""
+      className="viewport-grid relative h-full w-full overflow-hidden">
       <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
         <Box className="h-12 w-12 text-olive-500/70" aria-hidden />
         <p className="text-sm text-gunmetal-400">{t.viewport.placeholder}</p>
