@@ -1,5 +1,6 @@
 import { Box, Grid3x3, type LucideIcon, RotateCcw, ScanEye } from 'lucide-react';
 import { useId } from 'react';
+import { SavedDesignsButton } from '@/features/configurator/SavedDesignsDialog';
 import { useT } from '@/i18n';
 import { useToastStore } from '@/stores/useToastStore';
 import {
@@ -81,6 +82,10 @@ export function BottomToolbar() {
         <RotateCcw className="h-3.5 w-3.5" aria-hidden />
         {t.toolbar.resetView}
       </button>
+
+      <div className="h-5 w-px bg-gunmetal-700" aria-hidden />
+
+      <SavedDesignsButton />
 
       <p className="ml-auto truncate text-xs text-gunmetal-400">{t.modes[mode].description}</p>
     </footer>
