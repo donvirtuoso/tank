@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-gunmetal-950 font-sans text-gunmetal-100 antialiased;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-olive-400 ring-offset-1 ring-offset-gunmetal-950;
+  }
+}
+
+@layer components {
+  .icon-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded text-gunmetal-300 transition-colors hover:bg-gunmetal-700 hover:text-gunmetal-50;
+  }
+
+  .tool-btn {
+    @apply inline-flex h-8 items-center gap-1.5 rounded px-2.5 text-xs font-medium text-gunmetal-300 transition-colors hover:bg-gunmetal-700 hover:text-gunmetal-50;
+  }
+
+  .tool-btn[aria-pressed='true'] {
+    @apply bg-olive-700 text-olive-50 hover:bg-olive-600;
+  }
+
+  /* Lưới kỹ thuật làm nền cho khung nhìn. */
+  .viewport-grid {
+    background-color: theme('colors.gunmetal.950');
+    background-image:
+      linear-gradient(theme('colors.gunmetal.800 / 60%') 1px, transparent 1px),
+      linear-gradient(90deg, theme('colors.gunmetal.800 / 60%') 1px, transparent 1px);
+    background-size: 32px 32px;
+    background-position: center;
+  }
+}
