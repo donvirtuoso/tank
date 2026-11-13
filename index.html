@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#13171a" />
+    <title>Xưởng Xe Tăng</title>
+    <style>
+      /* Boot screen shown before the JS bundle mounts React (replaced on render). */
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        background: #13171a;
+        color: #9aa5ae;
+        font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+      }
+      .boot {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"><div class="boot">Đang tải…</div></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
