@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "slots": [
+    { "id": "hull", "nameVi": "Thân xe", "nameEn": "Hull", "acceptedCategories": ["hull"], "required": true, "maximumInstances": 1 },
+    { "id": "turret", "nameVi": "Tháp pháo", "nameEn": "Turret", "acceptedCategories": ["turret"], "required": true, "maximumInstances": 1 },
+    { "id": "barrel", "nameVi": "Nòng", "nameEn": "Barrel", "acceptedCategories": ["barrel"], "required": true, "maximumInstances": 1 },
+    { "id": "mantlet", "nameVi": "Tấm che nòng", "nameEn": "Mantlet", "acceptedCategories": ["mantlet"], "required": false, "maximumInstances": 1 },
+    { "id": "turret-hatch", "nameVi": "Cửa sập trên tháp", "nameEn": "Turret hatch", "acceptedCategories": ["hatch"], "acceptedVariantIds": ["hatch-round", "hatch-split"], "required": false, "maximumInstances": 2 },
+    { "id": "hull-hatch", "nameVi": "Cửa sập trên thân", "nameEn": "Hull hatch", "acceptedCategories": ["hatch"], "acceptedVariantIds": ["hatch-square", "hatch-split"], "required": false, "maximumInstances": 2 },
+    { "id": "cupola", "nameVi": "Vòm quan sát", "nameEn": "Cupola", "acceptedCategories": ["cupola"], "required": false, "maximumInstances": 1 },
+    { "id": "engine", "nameVi": "Khoang động cơ", "nameEn": "Engine bay", "acceptedCategories": ["engine"], "required": true, "maximumInstances": 1 },
+    { "id": "drivetrain", "nameVi": "Truyền động", "nameEn": "Drivetrain", "acceptedCategories": ["drivetrain"], "required": true, "maximumInstances": 1 },
+    { "id": "suspension", "nameVi": "Hệ treo", "nameEn": "Suspension", "acceptedCategories": ["suspension"], "required": true, "maximumInstances": 1 },
+    { "id": "road-wheels", "nameVi": "Bánh chịu tải", "nameEn": "Road wheels", "acceptedCategories": ["road-wheels"], "required": true, "maximumInstances": 1 },
+    { "id": "track", "nameVi": "Xích", "nameEn": "Track", "acceptedCategories": ["track"], "required": true, "maximumInstances": 1 },
+    { "id": "fender", "nameVi": "Chắn bùn", "nameEn": "Fender", "acceptedCategories": ["fender"], "required": false, "maximumInstances": 2 },
+    { "id": "side-skirt", "nameVi": "Tấm che hông", "nameEn": "Side skirt", "acceptedCategories": ["side-skirt"], "required": false, "maximumInstances": 1 },
+    { "id": "exhaust", "nameVi": "Ống xả", "nameEn": "Exhaust", "acceptedCategories": ["exhaust"], "required": false, "maximumInstances": 2 },
+    { "id": "headlight", "nameVi": "Đèn pha", "nameEn": "Headlight", "acceptedCategories": ["headlight"], "required": false, "maximumInstances": 2 },
+    { "id": "storage", "nameVi": "Hộp đồ", "nameEn": "Storage", "acceptedCategories": ["storage"], "required": false, "maximumInstances": 4 },
+    { "id": "antenna", "nameVi": "Ăng-ten", "nameEn": "Antenna", "acceptedCategories": ["antenna"], "required": false, "maximumInstances": 2 },
+    { "id": "periscope", "nameVi": "Kính tiềm vọng", "nameEn": "Periscope", "acceptedCategories": ["periscope"], "required": false, "maximumInstances": 4 },
+    { "id": "camouflage", "nameVi": "Màu sơn", "nameEn": "Paint scheme", "acceptedCategories": ["camouflage"], "required": true, "maximumInstances": 1 },
+    { "id": "insignia", "nameVi": "Phù hiệu", "nameEn": "Insignia", "acceptedCategories": ["insignia"], "required": false, "maximumInstances": 3 }
+  ],
+  "rules": [
+    {
+      "id": "turret-large-needs-large-hull", "kind": "requiresTag",
+      "source": { "categoryId": "turret", "tag": "turret-large" },
+      "target": { "categoryId": "hull", "tags": ["hull-large"] },
+      "message": { "vi": "Tháp cỡ lớn chỉ đặt vừa trên thân xe cỡ lớn.", "en": "A large turret only fits on a large hull." }
+    },
+    {
+      "id": "turret-medium-needs-medium-hull", "kind": "requiresTag",
+      "source": { "categoryId": "turret", "tag": "turret-medium" },
+      "target": { "categoryId": "hull", "tags": ["hull-medium", "hull-large"] },
+      "message": { "vi": "Tháp cỡ vừa cần thân xe cỡ vừa trở lên.", "en": "A medium turret needs a medium or larger hull." }
+    },
+    {
+      "id": "long-barrel-needs-big-turret", "kind": "requiresTag",
+      "source": { "categoryId": "barrel", "tag": "barrel-long" },
+      "target": { "categoryId": "turret", "tags": ["turret-medium", "turret-large"] },
+      "message": { "vi": "Nòng dài cần tháp cỡ vừa hoặc lớn để cân đối.", "en": "A long barrel needs a medium or large turret to stay balanced." }
+    },
+    {
+      "id": "interleaved-wheels-need-torsion", "kind": "requiresTag",
+      "source": { "categoryId": "road-wheels", "tag": "wheels-interleaved" },
+      "target": { "categoryId": "suspension", "tags": ["susp-torsion"] },
+      "message": { "vi": "Bánh xếp so le cần hệ treo thanh xoắn.", "en": "Interleaved wheels require torsion bar suspension." }
+    },
+    {
+      "id": "small-wheels-need-bogie-or-coil", "kind": "requiresTag",
+      "source": { "categoryId": "road-wheels", "tag": "wheels-small" },
+      "target": { "categoryId": "suspension", "tags": ["susp-bogie", "susp-coil"] },
+      "message": { "vi": "Bánh nhỏ theo cặp cần hệ treo cụm bogie hoặc lò xo cuộn.", "en": "Small paired wheels require bogie or coil spring suspension." }
+    },
+    {
+      "id": "large-wheels-need-torsion-or-coil", "kind": "requiresTag",
+      "source": { "categoryId": "road-wheels", "tag": "wheels-large" },
+      "target": { "categoryId": "suspension", "tags": ["susp-torsion", "susp-coil"] },
+      "message": { "vi": "Bánh lớn giãn cách cần hệ treo thanh xoắn hoặc lò xo cuộn.", "en": "Large spaced wheels require torsion bar or coil spring suspension." }
+    },
+    {
+      "id": "interleaved-wheels-forbid-narrow-track", "kind": "forbidsTag",
+      "source": { "categoryId": "road-wheels", "tag": "wheels-interleaved" },
+      "target": { "categoryId": "track", "tags": ["track-narrow"] },
+      "message": { "vi": "Bánh xếp so le không dùng được với xích hẹp.", "en": "Interleaved wheels cannot be used with a narrow track." }
+    },
+    {
+      "id": "large-hull-needs-wide-track", "kind": "requiresTag",
+      "source": { "categoryId": "hull", "tag": "hull-large" },
+      "target": { "categoryId": "track", "tags": ["track-wide"] },
+      "message": { "vi": "Thân xe cỡ lớn cần xích bản rộng để cân đối.", "en": "A large hull needs a wide track to look balanced." }
+    },
+    {
+      "id": "front-engine-needs-front-drive", "kind": "requiresTag",
+      "source": { "categoryId": "engine", "tag": "engine-front" },
+      "target": { "categoryId": "drivetrain", "tags": ["drive-front"] },
+      "message": { "vi": "Khoang máy phía trước cần bánh dẫn phía trước.", "en": "A front engine bay requires a front drive sprocket." }
+    },
+    {
+      "id": "rear-engine-needs-rear-or-shaft-drive", "kind": "requiresTag",
+      "source": { "categoryId": "engine", "tag": "engine-rear" },
+      "target": { "categoryId": "drivetrain", "tags": ["drive-rear", "drive-shaft"] },
+      "message": { "vi": "Khoang máy phía sau cần bánh dẫn phía sau hoặc bánh dẫn trước qua trục.", "en": "A rear engine bay requires a rear sprocket or a front sprocket via shaft." }
+    },
+    {
+      "id": "large-engine-forbids-small-hull", "kind": "forbidsTag",
+      "source": { "categoryId": "engine", "tag": "engine-large" },
+      "target": { "categoryId": "hull", "tags": ["hull-small"] },
+      "message": { "vi": "Khoang máy cỡ lớn không vừa thân xe gọn.", "en": "A large engine bay does not fit a compact hull." }
+    }
+  ]
+}
