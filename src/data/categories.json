@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    { "id": "hull", "nameVi": "Thân xe", "nameEn": "Hull", "icon": "box", "sortOrder": 1 },
+    { "id": "turret", "nameVi": "Tháp pháo", "nameEn": "Turret", "icon": "turret", "sortOrder": 2 },
+    { "id": "barrel", "nameVi": "Nòng (mô hình)", "nameEn": "Barrel (model)", "icon": "barrel", "sortOrder": 3 },
+    { "id": "mantlet", "nameVi": "Tấm che nòng", "nameEn": "Mantlet", "icon": "shield", "sortOrder": 4 },
+    { "id": "hatch", "nameVi": "Cửa sập", "nameEn": "Hatch", "icon": "hatch", "sortOrder": 5 },
+    { "id": "cupola", "nameVi": "Vòm quan sát", "nameEn": "Cupola", "icon": "dome", "sortOrder": 6 },
+    { "id": "engine", "nameVi": "Khoang động cơ", "nameEn": "Engine bay", "icon": "engine", "sortOrder": 7 },
+    { "id": "drivetrain", "nameVi": "Bố trí truyền động", "nameEn": "Drivetrain layout", "icon": "gear", "sortOrder": 8 },
+    { "id": "suspension", "nameVi": "Hệ treo", "nameEn": "Suspension", "icon": "spring", "sortOrder": 9 },
+    { "id": "road-wheels", "nameVi": "Bánh chịu tải", "nameEn": "Road wheels", "icon": "wheel", "sortOrder": 10 },
+    { "id": "track", "nameVi": "Xích", "nameEn": "Track", "icon": "track", "sortOrder": 11 },
+    { "id": "fender", "nameVi": "Chắn bùn", "nameEn": "Fender", "icon": "fender", "sortOrder": 12 },
+    { "id": "side-skirt", "nameVi": "Tấm che hông", "nameEn": "Side skirt", "icon": "panel", "sortOrder": 13 },
+    { "id": "exhaust", "nameVi": "Ống xả", "nameEn": "Exhaust", "icon": "exhaust", "sortOrder": 14 },
+    { "id": "headlight", "nameVi": "Đèn pha", "nameEn": "Headlight", "icon": "light", "sortOrder": 15 },
+    { "id": "storage", "nameVi": "Hộp đồ", "nameEn": "Storage box", "icon": "crate", "sortOrder": 16 },
+    { "id": "antenna", "nameVi": "Ăng-ten", "nameEn": "Antenna", "icon": "antenna", "sortOrder": 17 },
+    { "id": "periscope", "nameVi": "Kính tiềm vọng", "nameEn": "Periscope", "icon": "periscope", "sortOrder": 18 },
+    { "id": "camouflage", "nameVi": "Màu sơn ngụy trang", "nameEn": "Camouflage paint", "icon": "palette", "sortOrder": 19 },
+    { "id": "insignia", "nameVi": "Phù hiệu trang trí", "nameEn": "Decorative insignia", "icon": "star", "sortOrder": 20 }
+  ]
+}

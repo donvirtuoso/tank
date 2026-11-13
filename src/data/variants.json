@@ -1,0 +1,625 @@
+{
+  "schemaVersion": 1,
+  "variants": [
+    {
+      "id": "hull-compact", "categoryId": "hull", "nameVi": "Thân xe gọn", "nameEn": "Compact hull",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 2.4, "height": 0.9, "length": 4.2 }, "segments": 1 },
+      "attachmentAnchor": { "parent": "chassis", "position": [0, 0.6, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "mobility": 8, "protection": -6, "concealment": 6 },
+      "educationalNotes": { "vi": "Thân xe dạng hộp nhỏ gọn, các mặt phẳng đơn giản giúp mô hình dễ đọc hình khối.", "en": "A small box-shaped hull; its simple flat faces make the model's silhouette easy to read." },
+      "tags": ["hull-small"]
+    },
+    {
+      "id": "hull-standard", "categoryId": "hull", "nameVi": "Thân xe tiêu chuẩn", "nameEn": "Standard hull",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 2.8, "height": 1.0, "length": 5.2 }, "segments": 1 },
+      "attachmentAnchor": { "parent": "chassis", "position": [0, 0.65, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": {},
+      "educationalNotes": { "vi": "Tỉ lệ cân đối giữa dài, rộng và cao — hình dáng thường gặp trong các mô hình xe bánh xích.", "en": "Balanced length, width and height — a shape commonly seen in tracked-vehicle models." },
+      "tags": ["hull-medium"]
+    },
+    {
+      "id": "hull-sloped", "categoryId": "hull", "nameVi": "Thân xe vát nghiêng", "nameEn": "Sloped hull",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "width": 2.9, "height": 1.0, "length": 5.3, "frontSlope": 0.6 }, "segments": 2 },
+      "attachmentAnchor": { "parent": "chassis", "position": [0, 0.65, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "protection": 6, "mobility": -2, "concealment": 2 },
+      "educationalNotes": { "vi": "Mặt trước vát nghiêng tạo đường nét mềm hơn; đây là đặc điểm thiết kế dễ nhận ra khi nhìn từ bên hông.", "en": "An angled front plate gives smoother lines; a design cue that is easy to spot from the side." },
+      "tags": ["hull-medium", "hull-sloped"]
+    },
+    {
+      "id": "hull-heavy", "categoryId": "hull", "nameVi": "Thân xe cỡ lớn", "nameEn": "Large hull",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 3.4, "height": 1.2, "length": 6.4 }, "segments": 1 },
+      "attachmentAnchor": { "parent": "chassis", "position": [0, 0.75, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "cast-rough", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "mobility": -12, "protection": 14, "concealment": -8 },
+      "educationalNotes": { "vi": "Khối thân lớn, góc cạnh rõ, tạo cảm giác nặng nề trong cảnh 3D.", "en": "A large, boxy body with crisp edges that looks bulky in the 3D scene." },
+      "tags": ["hull-large"]
+    },
+    {
+      "id": "turret-small-round", "categoryId": "turret", "nameVi": "Tháp tròn nhỏ", "nameEn": "Small round turret",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.8, "height": 0.6 }, "segments": 24 },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.8, 0.2], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "rotate", "axis": "y", "speed": 0.5 },
+      "simulatedRatings": { "firepower": -6, "concealment": 6, "mobility": 2 },
+      "educationalNotes": { "vi": "Tháp hình trụ thấp, đơn giản; có thể xoay quanh trục đứng trong trình xem.", "en": "A short cylindrical turret with a simple form; it can rotate around the vertical axis in the viewer." },
+      "tags": ["turret-small"]
+    },
+    {
+      "id": "turret-low-profile", "categoryId": "turret", "nameVi": "Tháp dáng thấp", "nameEn": "Low-profile turret",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "width": 1.8, "height": 0.45, "length": 2.0 }, "segments": 8 },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.75, 0.2], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "rotate", "axis": "y", "speed": 0.5 },
+      "simulatedRatings": { "concealment": 10, "protection": -4 },
+      "educationalNotes": { "vi": "Tháp dẹt và rộng, làm hình bóng tổng thể của xe thấp hơn.", "en": "A flat, wide turret that lowers the vehicle's overall silhouette." },
+      "tags": ["turret-small"]
+    },
+    {
+      "id": "turret-medium-cast", "categoryId": "turret", "nameVi": "Tháp đúc cỡ vừa", "nameEn": "Medium cast turret",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "sphere", "dimensions": { "radius": 1.1, "flatten": 0.55 }, "segments": 24 },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.85, 0.3], "rotation": [0, 0, 0] },
+      "materialPreset": "cast-rough", "animationMetadata": { "kind": "rotate", "axis": "y", "speed": 0.4 },
+      "simulatedRatings": { "protection": 4, "firepower": 4 },
+      "educationalNotes": { "vi": "Bề mặt bo tròn, hơi sần mô phỏng kiểu chi tiết đúc trong mô hình tỉ lệ.", "en": "A rounded, slightly rough surface that imitates the cast look found in scale models." },
+      "tags": ["turret-medium"]
+    },
+    {
+      "id": "turret-large-welded", "categoryId": "turret", "nameVi": "Tháp hàn cỡ lớn", "nameEn": "Large welded turret",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "width": 2.6, "height": 0.9, "length": 2.8 }, "segments": 6 },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.95, 0.3], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "rotate", "axis": "y", "speed": 0.3 },
+      "simulatedRatings": { "protection": 8, "firepower": 8, "mobility": -6, "concealment": -6 },
+      "educationalNotes": { "vi": "Ghép từ nhiều tấm phẳng với đường hàn nổi, tạo hình khối góc cạnh to lớn.", "en": "Built from several flat panels with visible weld lines, giving a large angular form." },
+      "tags": ["turret-large"]
+    },
+    {
+      "id": "barrel-short", "categoryId": "barrel", "nameVi": "Nòng ngắn", "nameEn": "Short barrel",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.1, "length": 1.4 }, "segments": 16 },
+      "attachmentAnchor": { "parent": "turret", "position": [0, 0.1, 1.0], "rotation": [90, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "hinge", "axis": "x", "range": [-5, 15] },
+      "simulatedRatings": { "firepower": -6, "mobility": 2 },
+      "educationalNotes": { "vi": "Ống trụ ngắn gọn, giữ tổng chiều dài mô hình nhỏ.", "en": "A short, stubby cylinder that keeps the model's overall length small." },
+      "tags": ["barrel-short"]
+    },
+    {
+      "id": "barrel-medium", "categoryId": "barrel", "nameVi": "Nòng vừa", "nameEn": "Medium barrel",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.11, "length": 2.6 }, "segments": 16 },
+      "attachmentAnchor": { "parent": "turret", "position": [0, 0.1, 1.1], "rotation": [90, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "hinge", "axis": "x", "range": [-5, 15] },
+      "simulatedRatings": { "firepower": 2 },
+      "educationalNotes": { "vi": "Chiều dài cân đối với thân xe tiêu chuẩn, giúp tỉ lệ mô hình hài hoà.", "en": "Its length balances a standard hull, keeping the model's proportions harmonious." },
+      "tags": ["barrel-medium"]
+    },
+    {
+      "id": "barrel-long", "categoryId": "barrel", "nameVi": "Nòng dài có đầu nòng", "nameEn": "Long barrel with muzzle cap",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "radius": 0.12, "length": 3.8, "capRadius": 0.18 }, "segments": 16 },
+      "attachmentAnchor": { "parent": "turret", "position": [0, 0.1, 1.2], "rotation": [90, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "hinge", "axis": "x", "range": [-4, 12] },
+      "simulatedRatings": { "firepower": 10, "mobility": -4, "concealment": -3 },
+      "educationalNotes": { "vi": "Nòng mảnh và dài với khối trụ ở đầu; chi tiết đầu nòng là điểm nhấn thị giác.", "en": "A long slender barrel ending in a cylindrical cap; the muzzle detail is a visual accent." },
+      "tags": ["barrel-long"]
+    },
+    {
+      "id": "mantlet-box", "categoryId": "mantlet", "nameVi": "Tấm che hình hộp", "nameEn": "Box mantlet",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 0.9, "height": 0.5, "length": 0.3 } },
+      "attachmentAnchor": { "parent": "turret", "position": [0, 0.1, 0.95], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "hinge", "axis": "x", "range": [-5, 15] },
+      "simulatedRatings": { "protection": 2 },
+      "educationalNotes": { "vi": "Khối hộp phẳng che phần gốc nòng, cử động cùng nòng khi nâng hạ.", "en": "A flat block covering the barrel base; it moves together with the barrel when raised." },
+      "tags": ["mantlet-flat"]
+    },
+    {
+      "id": "mantlet-rounded", "categoryId": "mantlet", "nameVi": "Tấm che bo tròn", "nameEn": "Rounded mantlet",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.35, "length": 0.9 }, "segments": 20 },
+      "attachmentAnchor": { "parent": "turret", "position": [0, 0.1, 0.95], "rotation": [0, 0, 90] },
+      "materialPreset": "cast-rough", "animationMetadata": { "kind": "hinge", "axis": "x", "range": [-5, 15] },
+      "simulatedRatings": { "protection": 3 },
+      "educationalNotes": { "vi": "Dạng trụ nằm ngang, tạo đường cong mềm mại ở mặt trước tháp.", "en": "A horizontal cylinder that adds a soft curve to the turret front." },
+      "tags": ["mantlet-round"]
+    },
+    {
+      "id": "mantlet-slim", "categoryId": "mantlet", "nameVi": "Tấm che mảnh", "nameEn": "Slim mantlet",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 0.5, "height": 0.35, "length": 0.25 } },
+      "attachmentAnchor": { "parent": "turret", "position": [0, 0.1, 0.95], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "hinge", "axis": "x", "range": [-5, 15] },
+      "simulatedRatings": { "protection": -1, "concealment": 2 },
+      "educationalNotes": { "vi": "Chi tiết nhỏ, tinh giản, phù hợp với tháp dáng thấp.", "en": "A small, minimal detail that suits low-profile turrets." },
+      "tags": ["mantlet-flat"]
+    },
+    {
+      "id": "hatch-round", "categoryId": "hatch", "nameVi": "Cửa sập tròn", "nameEn": "Round hatch",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.3, "height": 0.06 }, "segments": 20 },
+      "attachmentAnchor": { "parent": "turret", "position": [0.3, 0.32, -0.2], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "hinge", "axis": "x", "range": [0, 100] },
+      "simulatedRatings": {},
+      "educationalNotes": { "vi": "Nắp tròn có bản lề, có thể mở trong hoạt ảnh để quan sát chi tiết.", "en": "A hinged round lid that can open in the animation to show detail." },
+      "tags": ["hatch-turret"]
+    },
+    {
+      "id": "hatch-square", "categoryId": "hatch", "nameVi": "Cửa sập vuông", "nameEn": "Square hatch",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 0.55, "height": 0.06, "length": 0.55 } },
+      "attachmentAnchor": { "parent": "hull", "position": [-0.6, 0.52, 1.6], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "hinge", "axis": "z", "range": [0, 95] },
+      "simulatedRatings": {},
+      "educationalNotes": { "vi": "Nắp phẳng hình vuông đặt trên nóc thân xe phía trước.", "en": "A flat square lid placed on the front of the hull roof." },
+      "tags": ["hatch-hull"]
+    },
+    {
+      "id": "hatch-split", "categoryId": "hatch", "nameVi": "Cửa sập hai cánh", "nameEn": "Split hatch",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "width": 0.6, "height": 0.06, "length": 0.5 }, "repeat": 2 },
+      "attachmentAnchor": { "parent": "turret", "position": [-0.3, 0.32, -0.2], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "hinge", "axis": "z", "range": [0, 90] },
+      "simulatedRatings": { "reliability": 1 },
+      "educationalNotes": { "vi": "Hai cánh mở sang hai phía, minh hoạ cách chia nhỏ một chi tiết lớn.", "en": "Two leaves that open to either side, showing how a large part can be split." },
+      "tags": ["hatch-turret", "hatch-hull"]
+    },
+    {
+      "id": "cupola-low", "categoryId": "cupola", "nameVi": "Vòm thấp", "nameEn": "Low cupola",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.35, "height": 0.2 }, "segments": 20 },
+      "attachmentAnchor": { "parent": "turret", "position": [0.4, 0.35, -0.3], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "rotate", "axis": "y", "speed": 0.3 },
+      "simulatedRatings": { "concealment": 1 },
+      "educationalNotes": { "vi": "Vòm trụ thấp trên nóc tháp, gợi ý vị trí quan sát xung quanh.", "en": "A short cylindrical dome on the turret roof that suggests an all-round viewing spot." },
+      "tags": ["cupola-low"]
+    },
+    {
+      "id": "cupola-domed", "categoryId": "cupola", "nameVi": "Vòm bán cầu", "nameEn": "Domed cupola",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "sphere", "dimensions": { "radius": 0.35, "flatten": 0.5 }, "segments": 20 },
+      "attachmentAnchor": { "parent": "turret", "position": [0.4, 0.35, -0.3], "rotation": [0, 0, 0] },
+      "materialPreset": "cast-rough", "animationMetadata": { "kind": "rotate", "axis": "y", "speed": 0.3 },
+      "simulatedRatings": { "protection": 1 },
+      "educationalNotes": { "vi": "Nửa khối cầu bo tròn, tạo đường nét mềm trên nóc tháp.", "en": "A rounded half-sphere that adds a soft line to the turret roof." },
+      "tags": ["cupola-domed"]
+    },
+    {
+      "id": "cupola-tall-vision", "categoryId": "cupola", "nameVi": "Vòm cao nhiều ô kính", "nameEn": "Tall multi-window cupola",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "radius": 0.35, "height": 0.4 }, "repeat": 6, "segments": 12 },
+      "attachmentAnchor": { "parent": "turret", "position": [0.4, 0.35, -0.3], "rotation": [0, 0, 0] },
+      "materialPreset": "glass", "animationMetadata": { "kind": "rotate", "axis": "y", "speed": 0.3 },
+      "simulatedRatings": { "reliability": 2, "concealment": -3 },
+      "educationalNotes": { "vi": "Một vòng ô kính nhỏ bao quanh — ví dụ về chi tiết lặp lại theo vòng tròn.", "en": "A ring of small windows — an example of a detail repeated around a circle." },
+      "tags": ["cupola-tall"]
+    },
+    {
+      "id": "engine-rear-compact", "categoryId": "engine", "nameVi": "Khoang máy sau gọn", "nameEn": "Compact rear engine bay",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 2.2, "height": 0.25, "length": 1.4 } },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.52, -1.8], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 4, "mobility": 2 },
+      "educationalNotes": { "vi": "Nắp khoang máy có lưới tản nhiệt trang trí ở phía sau thân xe.", "en": "An engine deck with decorative grilles at the rear of the hull." },
+      "tags": ["engine-rear"]
+    },
+    {
+      "id": "engine-rear-large", "categoryId": "engine", "nameVi": "Khoang máy sau cỡ lớn", "nameEn": "Large rear engine bay",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 2.6, "height": 0.35, "length": 1.9 } },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.55, -2.0], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "mobility": 8, "reliability": -4, "concealment": -2 },
+      "educationalNotes": { "vi": "Nắp máy lớn hơn với nhiều tấm lưới, chiếm phần lớn nóc sau.", "en": "A larger deck with several grille panels covering most of the rear roof." },
+      "tags": ["engine-rear", "engine-large"]
+    },
+    {
+      "id": "engine-front", "categoryId": "engine", "nameVi": "Khoang máy phía trước", "nameEn": "Front engine bay",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 2.2, "height": 0.25, "length": 1.4 } },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.52, 1.6], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "protection": 3, "reliability": 1 },
+      "educationalNotes": { "vi": "Lưới tản nhiệt đặt ở phía trước, làm thay đổi bố cục nóc thân xe.", "en": "Grilles placed at the front, changing the layout of the hull roof." },
+      "tags": ["engine-front"]
+    },
+    {
+      "id": "drivetrain-rear-sprocket", "categoryId": "drivetrain", "nameVi": "Bánh dẫn phía sau", "nameEn": "Rear drive sprocket",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.4, "width": 0.3 }, "segments": 18 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.4, -2.4], "rotation": [0, 0, 90], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "spin", "axis": "x", "speed": 1.0 },
+      "simulatedRatings": { "reliability": 3 },
+      "educationalNotes": { "vi": "Bánh răng ở cuối xe kéo dải xích; trong hoạt ảnh nó quay cùng xích.", "en": "A toothed wheel at the rear that pulls the track; it spins with the track in the animation." },
+      "tags": ["drive-rear"]
+    },
+    {
+      "id": "drivetrain-front-shaft", "categoryId": "drivetrain", "nameVi": "Bánh dẫn trước qua trục", "nameEn": "Front sprocket via shaft",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.4, "width": 0.3 }, "segments": 18 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.4, 2.4], "rotation": [0, 0, 90], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "spin", "axis": "x", "speed": 1.0 },
+      "simulatedRatings": { "mobility": 2, "reliability": -2 },
+      "educationalNotes": { "vi": "Bánh răng ở đầu xe nối với khoang máy phía sau bằng một trục dài (minh hoạ khái niệm).", "en": "A front sprocket linked to a rear engine bay by a long shaft (conceptual illustration)." },
+      "tags": ["drive-front", "drive-shaft"]
+    },
+    {
+      "id": "drivetrain-front-direct", "categoryId": "drivetrain", "nameVi": "Bánh dẫn trước trực tiếp", "nameEn": "Direct front sprocket",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.42, "width": 0.3 }, "segments": 18 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.4, 2.4], "rotation": [0, 0, 90], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "spin", "axis": "x", "speed": 1.0 },
+      "simulatedRatings": { "reliability": 2 },
+      "educationalNotes": { "vi": "Bánh răng phía trước đặt sát khoang máy trước, bố cục ngắn gọn.", "en": "A front sprocket placed right next to a front engine bay for a compact layout." },
+      "tags": ["drive-front"]
+    },
+    {
+      "id": "suspension-torsion", "categoryId": "suspension", "nameVi": "Treo thanh xoắn", "nameEn": "Torsion bar suspension",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "armLength": 0.5, "armWidth": 0.1 }, "repeat": 6 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.2, 0.3, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "hinge", "axis": "x", "range": [-8, 8] },
+      "simulatedRatings": { "mobility": 4, "reliability": 1 },
+      "educationalNotes": { "vi": "Các tay đòn riêng lẻ cho từng bánh, gần như ẩn bên trong thân xe.", "en": "Individual arms for each wheel, mostly hidden inside the hull." },
+      "tags": ["susp-torsion"]
+    },
+    {
+      "id": "suspension-bogie", "categoryId": "suspension", "nameVi": "Treo cụm bogie", "nameEn": "Bogie suspension",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "width": 0.6, "height": 0.4 }, "repeat": 3 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.3, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "cast-rough", "animationMetadata": { "kind": "sway", "axis": "x", "range": [-6, 6] },
+      "simulatedRatings": { "reliability": 4, "mobility": -2 },
+      "educationalNotes": { "vi": "Cụm khung lộ ra bên ngoài giữ từng cặp bánh — dễ nhìn thấy cấu trúc.", "en": "Exposed frames holding pairs of wheels — the structure is easy to see." },
+      "tags": ["susp-bogie"]
+    },
+    {
+      "id": "suspension-coil", "categoryId": "suspension", "nameVi": "Treo lò xo cuộn", "nameEn": "Coil spring suspension",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "coilRadius": 0.12, "coilHeight": 0.4 }, "repeat": 5 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.35, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "translate", "axis": "y", "range": [-0.05, 0.05] },
+      "simulatedRatings": { "mobility": 2, "reliability": 2 },
+      "educationalNotes": { "vi": "Lò xo xoắn ốc nhìn thấy được, co giãn nhẹ trong hoạt ảnh.", "en": "Visible helical springs that compress gently in the animation." },
+      "tags": ["susp-coil"]
+    },
+    {
+      "id": "wheels-large-spaced", "categoryId": "road-wheels", "nameVi": "Bánh lớn giãn cách", "nameEn": "Large spaced wheels",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.42, "width": 0.25 }, "repeat": 5, "segments": 20 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.35, 0], "rotation": [0, 0, 90], "mirrored": true },
+      "materialPreset": "rubber", "animationMetadata": { "kind": "spin", "axis": "x", "speed": 1.0 },
+      "simulatedRatings": { "mobility": 4 },
+      "educationalNotes": { "vi": "Năm bánh lớn xếp cách đều, tạo nhịp điệu rõ ràng ở hông xe.", "en": "Five large, evenly spaced wheels create a clear rhythm along the side." },
+      "tags": ["wheels-large"]
+    },
+    {
+      "id": "wheels-interleaved", "categoryId": "road-wheels", "nameVi": "Bánh xếp chồng so le", "nameEn": "Interleaved wheels",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.45, "width": 0.2 }, "repeat": 8, "segments": 20 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.35, 0], "rotation": [0, 0, 90], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "spin", "axis": "x", "speed": 1.0 },
+      "simulatedRatings": { "mobility": 5, "reliability": -6, "protection": 2 },
+      "educationalNotes": { "vi": "Các bánh chồng lên nhau theo kiểu so le — mẫu hình học đẹp mắt nhưng phức tạp khi lắp mô hình.", "en": "Wheels overlap in a staggered pattern — visually striking but fiddly to assemble in a model." },
+      "tags": ["wheels-interleaved"]
+    },
+    {
+      "id": "wheels-small-bogie", "categoryId": "road-wheels", "nameVi": "Bánh nhỏ theo cặp", "nameEn": "Small paired wheels",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.25, "width": 0.2 }, "repeat": 8, "segments": 16 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.3, 0], "rotation": [0, 0, 90], "mirrored": true },
+      "materialPreset": "rubber", "animationMetadata": { "kind": "spin", "axis": "x", "speed": 1.4 },
+      "simulatedRatings": { "mobility": -3, "reliability": 4 },
+      "educationalNotes": { "vi": "Nhiều bánh nhỏ gom theo cặp, thường đi cùng hệ treo dạng cụm.", "en": "Many small wheels grouped in pairs, usually paired with clustered suspensions." },
+      "tags": ["wheels-small"]
+    },
+    {
+      "id": "track-narrow", "categoryId": "track", "nameVi": "Xích hẹp", "nameEn": "Narrow track",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "linkWidth": 0.35, "linkLength": 0.15, "thickness": 0.05 }, "repeat": 80 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.3, 0.35, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "scroll", "axis": "z", "speed": 1.0 },
+      "simulatedRatings": { "mobility": -3, "concealment": 2 },
+      "educationalNotes": { "vi": "Dải xích mảnh, hợp với thân xe nhỏ; hoạt ảnh cuộn để thể hiện chuyển động.", "en": "A slim track band that suits small hulls; it scrolls in the animation to show motion." },
+      "tags": ["track-narrow"]
+    },
+    {
+      "id": "track-standard", "categoryId": "track", "nameVi": "Xích tiêu chuẩn", "nameEn": "Standard track",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "linkWidth": 0.5, "linkLength": 0.15, "thickness": 0.06 }, "repeat": 90 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.35, 0.35, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "scroll", "axis": "z", "speed": 1.0 },
+      "simulatedRatings": { "mobility": 2 },
+      "educationalNotes": { "vi": "Độ rộng xích cân đối với thân xe vừa — lựa chọn an toàn cho đa số cấu hình.", "en": "Track width balanced for a medium hull — a safe choice for most builds." },
+      "tags": ["track-standard"]
+    },
+    {
+      "id": "track-wide", "categoryId": "track", "nameVi": "Xích bản rộng", "nameEn": "Wide track",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "linkWidth": 0.7, "linkLength": 0.16, "thickness": 0.07 }, "repeat": 96 },
+      "attachmentAnchor": { "parent": "chassis", "position": [1.45, 0.35, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "scroll", "axis": "z", "speed": 1.0 },
+      "simulatedRatings": { "mobility": 5, "concealment": -2 },
+      "educationalNotes": { "vi": "Xích rộng làm mô hình trông vững chãi, cân đối với thân xe cỡ lớn.", "en": "Wide tracks make the model look sturdy and balance a large hull." },
+      "tags": ["track-wide"]
+    },
+    {
+      "id": "fender-straight", "categoryId": "fender", "nameVi": "Chắn bùn thẳng", "nameEn": "Straight fender",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "width": 0.6, "length": 5.0 } },
+      "attachmentAnchor": { "parent": "hull", "position": [1.35, 0.5, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 1 },
+      "educationalNotes": { "vi": "Tấm phẳng chạy dọc trên dải xích.", "en": "A flat sheet running along the top of the track." },
+      "tags": ["fender-full"]
+    },
+    {
+      "id": "fender-angled", "categoryId": "fender", "nameVi": "Chắn bùn bẻ góc", "nameEn": "Angled fender",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "width": 0.6, "length": 5.0, "bend": 0.3 } },
+      "attachmentAnchor": { "parent": "hull", "position": [1.35, 0.5, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 1, "protection": 1 },
+      "educationalNotes": { "vi": "Hai đầu chắn bùn được bẻ chéo, tạo đường nét động hơn.", "en": "Both ends of the fender are bent, giving a more dynamic outline." },
+      "tags": ["fender-full"]
+    },
+    {
+      "id": "fender-short", "categoryId": "fender", "nameVi": "Chắn bùn ngắn", "nameEn": "Short fender",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "width": 0.6, "length": 1.2 } },
+      "attachmentAnchor": { "parent": "hull", "position": [1.35, 0.5, 2.0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "mobility": 1 },
+      "educationalNotes": { "vi": "Chỉ che phần đầu xích, để lộ phần lớn bánh và xích.", "en": "Covers only the front of the track, leaving most wheels and track visible." },
+      "tags": ["fender-partial"]
+    },
+    {
+      "id": "skirt-plates", "categoryId": "side-skirt", "nameVi": "Tấm che dạng tấm rời", "nameEn": "Segmented skirt plates",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 0.05, "height": 0.6, "length": 0.9 }, "repeat": 5 },
+      "attachmentAnchor": { "parent": "hull", "position": [1.6, 0.25, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "sway", "axis": "z", "range": [-2, 2] },
+      "simulatedRatings": { "protection": 3, "mobility": -1, "concealment": 1 },
+      "educationalNotes": { "vi": "Các tấm rời treo cạnh hông, khẽ đung đưa khi xe chuyển động trong hoạt ảnh.", "en": "Separate plates hung along the side that sway slightly as the model moves." },
+      "tags": ["skirt-plate"]
+    },
+    {
+      "id": "skirt-mesh", "categoryId": "side-skirt", "nameVi": "Tấm che lưới", "nameEn": "Mesh skirt",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "height": 0.6, "length": 4.6 } },
+      "attachmentAnchor": { "parent": "hull", "position": [1.6, 0.25, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "protection": 2 },
+      "educationalNotes": { "vi": "Lưới mảnh nhìn xuyên qua được — ví dụ về vật liệu bán trong suốt trong 3D.", "en": "A thin see-through mesh — an example of a semi-transparent material in 3D." },
+      "tags": ["skirt-mesh"]
+    },
+    {
+      "id": "skirt-rubber", "categoryId": "side-skirt", "nameVi": "Tấm che cao su", "nameEn": "Rubber skirt",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "height": 0.4, "length": 4.8 } },
+      "attachmentAnchor": { "parent": "hull", "position": [1.55, 0.3, 0], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "rubber", "animationMetadata": { "kind": "sway", "axis": "z", "range": [-3, 3] },
+      "simulatedRatings": { "concealment": 2, "reliability": 1 },
+      "educationalNotes": { "vi": "Dải mềm màu tối che phần trên của xích, làm hông xe trông gọn gàng.", "en": "A dark flexible strip covering the upper track, tidying the side view." },
+      "tags": ["skirt-rubber"]
+    },
+    {
+      "id": "exhaust-single", "categoryId": "exhaust", "nameVi": "Ống xả đơn", "nameEn": "Single exhaust",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.1, "length": 0.5 }, "segments": 12 },
+      "attachmentAnchor": { "parent": "hull", "position": [0.6, 0.6, -2.6], "rotation": [90, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": 1 },
+      "educationalNotes": { "vi": "Một ống trụ nhỏ ở đuôi xe, bề mặt mờ màu khói.", "en": "A small cylinder at the rear with a smoky matte surface." },
+      "tags": ["exhaust-rear"]
+    },
+    {
+      "id": "exhaust-twin", "categoryId": "exhaust", "nameVi": "Ống xả đôi", "nameEn": "Twin exhausts",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.09, "length": 0.5 }, "repeat": 2, "segments": 12 },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.6, -2.6], "rotation": [90, 0, 0], "mirrored": true },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 1 },
+      "educationalNotes": { "vi": "Hai ống đối xứng ở đuôi xe — minh hoạ cách dùng phép đối xứng gương.", "en": "Two symmetric pipes at the rear — illustrating mirror symmetry." },
+      "tags": ["exhaust-rear"]
+    },
+    {
+      "id": "exhaust-shrouded", "categoryId": "exhaust", "nameVi": "Ống xả có vỏ che", "nameEn": "Shrouded exhaust",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 0.4, "height": 0.25, "length": 0.6 } },
+      "attachmentAnchor": { "parent": "hull", "position": [0.6, 0.6, -2.6], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": 3 },
+      "educationalNotes": { "vi": "Ống xả được bọc trong hộp kim loại, hình khối gọn hơn.", "en": "The exhaust is enclosed in a metal box for a tidier shape." },
+      "tags": ["exhaust-rear"]
+    },
+    {
+      "id": "headlight-round", "categoryId": "headlight", "nameVi": "Đèn tròn", "nameEn": "Round headlight",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.1, "length": 0.12 }, "segments": 16 },
+      "attachmentAnchor": { "parent": "hull", "position": [1.0, 0.55, 2.6], "rotation": [90, 0, 0], "mirrored": true },
+      "materialPreset": "glass", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 1, "concealment": -1 },
+      "educationalNotes": { "vi": "Đèn tròn với mặt kính phản chiếu ánh sáng của cảnh.", "en": "A round lamp whose glass face reflects the scene lighting." },
+      "tags": ["light-front"]
+    },
+    {
+      "id": "headlight-guarded", "categoryId": "headlight", "nameVi": "Đèn có lồng bảo vệ", "nameEn": "Guarded headlight",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "radius": 0.1, "length": 0.15, "cage": 0.14 }, "segments": 12 },
+      "attachmentAnchor": { "parent": "hull", "position": [1.0, 0.55, 2.6], "rotation": [90, 0, 0], "mirrored": true },
+      "materialPreset": "glass", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 2, "concealment": -1 },
+      "educationalNotes": { "vi": "Đèn được bao bởi khung dây mảnh, thêm chi tiết nhỏ tinh tế.", "en": "A lamp surrounded by a thin wire cage, adding fine detail." },
+      "tags": ["light-front"]
+    },
+    {
+      "id": "headlight-blackout", "categoryId": "headlight", "nameVi": "Đèn che chụp", "nameEn": "Hooded headlight",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "width": 0.15, "height": 0.08, "length": 0.12 } },
+      "attachmentAnchor": { "parent": "hull", "position": [1.0, 0.55, 2.6], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": 2 },
+      "educationalNotes": { "vi": "Đèn có mái che phía trên, chỉ để lộ một khe sáng hẹp.", "en": "A lamp with a hood on top, showing only a narrow slit of light." },
+      "tags": ["light-front"]
+    },
+    {
+      "id": "storage-box-rear", "categoryId": "storage", "nameVi": "Hộp đồ phía sau tháp", "nameEn": "Turret rear stowage box",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 1.4, "height": 0.4, "length": 0.5 } },
+      "attachmentAnchor": { "parent": "turret", "position": [0, 0.05, -1.1], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 2, "concealment": -1 },
+      "educationalNotes": { "vi": "Hộp chứa đồ gắn sau tháp, làm cân đối hình dáng phía sau.", "en": "A stowage box on the turret rear that balances the back profile." },
+      "tags": ["storage-turret"]
+    },
+    {
+      "id": "storage-side-crate", "categoryId": "storage", "nameVi": "Thùng gỗ bên hông", "nameEn": "Side crate",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 0.4, "height": 0.35, "length": 0.8 } },
+      "attachmentAnchor": { "parent": "hull", "position": [1.3, 0.75, -0.5], "rotation": [0, 0, 0], "mirrored": true },
+      "materialPreset": "canvas", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 2 },
+      "educationalNotes": { "vi": "Thùng vân gỗ đặt trên chắn bùn, thêm màu sắc và kết cấu.", "en": "A wood-textured crate on the fender that adds colour and texture." },
+      "tags": ["storage-hull"]
+    },
+    {
+      "id": "storage-tarp-roll", "categoryId": "storage", "nameVi": "Cuộn bạt", "nameEn": "Tarp roll",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "capsule", "dimensions": { "radius": 0.15, "length": 1.6 }, "segments": 12 },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.65, -2.4], "rotation": [0, 0, 90] },
+      "materialPreset": "canvas", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": 1, "reliability": 1 },
+      "educationalNotes": { "vi": "Cuộn vải bạt buộc ở đuôi xe — chi tiết mềm tương phản với bề mặt kim loại.", "en": "A rolled canvas tied at the rear — a soft detail contrasting with metal surfaces." },
+      "tags": ["storage-hull"]
+    },
+    {
+      "id": "antenna-whip", "categoryId": "antenna", "nameVi": "Ăng-ten roi", "nameEn": "Whip antenna",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.015, "length": 2.0 }, "segments": 6 },
+      "attachmentAnchor": { "parent": "turret", "position": [-0.6, 0.3, -0.6], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "sway", "axis": "x", "range": [-6, 6] },
+      "simulatedRatings": { "reliability": 2, "concealment": -2 },
+      "educationalNotes": { "vi": "Thanh mảnh dài, đung đưa nhẹ trong hoạt ảnh.", "en": "A long thin rod that sways gently in the animation." },
+      "tags": ["antenna-whip"]
+    },
+    {
+      "id": "antenna-short", "categoryId": "antenna", "nameVi": "Ăng-ten ngắn", "nameEn": "Short antenna",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.02, "length": 0.8 }, "segments": 6 },
+      "attachmentAnchor": { "parent": "turret", "position": [-0.6, 0.3, -0.6], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "sway", "axis": "x", "range": [-3, 3] },
+      "simulatedRatings": { "reliability": 1 },
+      "educationalNotes": { "vi": "Thanh ngắn gọn, ít làm thay đổi hình bóng của xe.", "en": "A short rod that barely changes the vehicle's silhouette." },
+      "tags": ["antenna-short"]
+    },
+    {
+      "id": "antenna-frame", "categoryId": "antenna", "nameVi": "Ăng-ten khung", "nameEn": "Frame antenna",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "torus", "dimensions": { "radius": 0.9, "tube": 0.02 }, "segments": 24 },
+      "attachmentAnchor": { "parent": "hull", "position": [0, 0.7, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-worn", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 3, "concealment": -4 },
+      "educationalNotes": { "vi": "Khung vòng lớn bao quanh nóc xe — chi tiết dễ nhận diện trong mô hình trưng bày.", "en": "A large ring frame around the roof — a distinctive detail in display models." },
+      "tags": ["antenna-frame"]
+    },
+    {
+      "id": "periscope-block", "categoryId": "periscope", "nameVi": "Kính tiềm vọng khối", "nameEn": "Block periscope",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "box", "dimensions": { "width": 0.2, "height": 0.12, "length": 0.1 } },
+      "attachmentAnchor": { "parent": "turret", "position": [-0.4, 0.33, 0.4], "rotation": [0, 0, 0] },
+      "materialPreset": "glass", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "reliability": 1 },
+      "educationalNotes": { "vi": "Khối nhỏ với mặt kính phản quang trên nóc.", "en": "A small block with a reflective glass face on the roof." },
+      "tags": ["periscope-fixed"]
+    },
+    {
+      "id": "periscope-rotating", "categoryId": "periscope", "nameVi": "Kính tiềm vọng xoay", "nameEn": "Rotating periscope",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "cylinder", "dimensions": { "radius": 0.1, "height": 0.2 }, "segments": 12 },
+      "attachmentAnchor": { "parent": "turret", "position": [-0.4, 0.33, 0.4], "rotation": [0, 0, 0] },
+      "materialPreset": "glass", "animationMetadata": { "kind": "rotate", "axis": "y", "speed": 0.6 },
+      "simulatedRatings": { "reliability": 2, "concealment": -1 },
+      "educationalNotes": { "vi": "Đầu kính hình trụ xoay chậm trong hoạt ảnh, minh hoạ chuyển động quay.", "en": "A cylindrical head that turns slowly in the animation, illustrating rotation." },
+      "tags": ["periscope-rotating"]
+    },
+    {
+      "id": "periscope-hooded", "categoryId": "periscope", "nameVi": "Kính tiềm vọng có mái che", "nameEn": "Hooded periscope",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "composite", "dimensions": { "width": 0.22, "height": 0.14, "length": 0.14 } },
+      "attachmentAnchor": { "parent": "hull", "position": [0.6, 0.52, 2.0], "rotation": [0, 0, 0] },
+      "materialPreset": "steel-matte", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": 1, "reliability": 1 },
+      "educationalNotes": { "vi": "Mặt kính được che bởi một mái nhỏ, giảm phản chiếu trong cảnh.", "en": "The glass is covered by a small hood, reducing reflections in the scene." },
+      "tags": ["periscope-fixed"]
+    },
+    {
+      "id": "camo-olive", "categoryId": "camouflage", "nameVi": "Xanh ô liu đơn sắc", "nameEn": "Solid olive",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "patternScale": 1 } },
+      "attachmentAnchor": { "parent": "root", "position": [0, 0, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "paint-olive", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": 4 },
+      "educationalNotes": { "vi": "Một màu xanh ô liu phủ toàn bộ — nền tảng phổ biến khi sơn mô hình.", "en": "A single olive colour over everything — a common base when painting models." },
+      "tags": ["camo-solid"]
+    },
+    {
+      "id": "camo-sand", "categoryId": "camouflage", "nameVi": "Màu cát", "nameEn": "Sand",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "patternScale": 1 } },
+      "attachmentAnchor": { "parent": "root", "position": [0, 0, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "paint-sand", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": 3 },
+      "educationalNotes": { "vi": "Tông vàng cát sáng, làm nổi bật bóng đổ và chi tiết khắc chìm.", "en": "A light sand tone that brings out shadows and recessed details." },
+      "tags": ["camo-solid"]
+    },
+    {
+      "id": "camo-disruptive", "categoryId": "camouflage", "nameVi": "Vằn loang ba màu", "nameEn": "Three-tone disruptive",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "patternScale": 2.5, "noiseFrequency": 0.8 } },
+      "attachmentAnchor": { "parent": "root", "position": [0, 0, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "paint-camo", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": 8 },
+      "educationalNotes": { "vi": "Mảng màu loang được sinh bằng nhiễu thủ tục — ví dụ về texture không cần ảnh.", "en": "Blotches generated with procedural noise — an example of a texture without image files." },
+      "tags": ["camo-pattern"]
+    },
+    {
+      "id": "insignia-star", "categoryId": "insignia", "nameVi": "Ngôi sao trang trí", "nameEn": "Decorative star",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "size": 0.5 } },
+      "attachmentAnchor": { "parent": "hull", "position": [1.42, 0.65, 0.5], "rotation": [0, 90, 0], "mirrored": true },
+      "materialPreset": "decal", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": -1 },
+      "educationalNotes": { "vi": "Hình ngôi sao năm cánh dạng decal, chỉ mang tính trang trí.", "en": "A five-pointed star decal, purely decorative." },
+      "tags": ["insignia-decal"]
+    },
+    {
+      "id": "insignia-number", "categoryId": "insignia", "nameVi": "Số hiệu trang trí", "nameEn": "Decorative number",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "size": 0.4 } },
+      "attachmentAnchor": { "parent": "turret", "position": [1.0, 0.1, 0], "rotation": [0, 90, 0], "mirrored": true },
+      "materialPreset": "decal", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": -1 },
+      "educationalNotes": { "vi": "Ba chữ số tuỳ chọn trên tháp, giúp phân biệt các mô hình trong bộ sưu tập.", "en": "Three custom digits on the turret to tell models apart in a collection." },
+      "tags": ["insignia-decal"]
+    },
+    {
+      "id": "insignia-stripe", "categoryId": "insignia", "nameVi": "Sọc nhận diện", "nameEn": "Identification stripe",
+      "geometrySource": "procedural",
+      "procedural": { "primitive": "plane", "dimensions": { "width": 0.15, "length": 2.0 } },
+      "attachmentAnchor": { "parent": "turret", "position": [0, 0.2, 0], "rotation": [0, 0, 0] },
+      "materialPreset": "decal", "animationMetadata": { "kind": "none" },
+      "simulatedRatings": { "concealment": -2 },
+      "educationalNotes": { "vi": "Một dải màu sáng quanh tháp, làm điểm nhấn thị giác cho mô hình.", "en": "A bright band around the turret, a visual accent for the model." },
+      "tags": ["insignia-stripe"]
+    }
+  ]
+}
