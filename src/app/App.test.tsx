@@ -1,6 +1,8 @@
-import { render, screen, within } from '@testing-library/react';
+import { act, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { useSavedDesignsStore } from '@/stores/useSavedDesignsStore';
+import { useVehicleStore, variantInSlot } from '@/stores/useVehicleStore';
 import { type Mode, useViewerStore } from '@/stores/useViewerStore';
 import { App } from './App';
 
@@ -111,6 +113,68 @@ describe('App', () => {
 
     await user.click(screen.getByRole('button', { name: 'Đóng thông báo' }));
     expect(screen.queryByText('Đã đặt lại góc nhìn')).not.toBeInTheDocument();
+  });
+
+  describe('lưu / nạp thiết kế', () => {
+    beforeEach(() => {
+      window.localStorage.clear();
+      useVehicleStore.getState().reset();
+      useSavedDesignsStore.setState({ designs: [], currentId: null, error: null });
+    });
+    afterEach(() => window.localStorage.clear());
+
+    const fireBeforeUnload = () => {
+      const event = new Event('beforeunload', { cancelable: true });
+      window.dispatchEvent(event);
+      return event.defaultPrevented;
+    };
+
+    it('cảnh báo khi rời trang lúc còn thay đổi chưa lưu', () => {
+      const { unmount } = render(<App />);
+      expect(fireBeforeUnload()).toBe(false);
+
+      act(() => {
+        useVehicleStore.getState().applyChange('barrel', 'barrel-long');
+      });
+      expect(fireBeforeUnload()).toBe(true);
+
+      act(() => {
+        useVehicleStore.getState().markSaved();
+      });
+      expect(fireBeforeUnload()).toBe(false);
+      unmount();
+    });
+
+    it('mở hộp thoại thiết kế từ thanh công cụ và lưu được', async () => {
+      const user = userEvent.setup();
+      render(<App />);
+      act(() => {
+        useVehicleStore.getState().applyChange('barrel', 'barrel-long');
+      });
+
+      const toolbar = screen.getByRole('toolbar', { name: 'Thanh công cụ' });
+      await user.click(within(toolbar).getByRole('button', { name: /Lưu \/ mở thiết kế/ }));
+      const dialog = screen.getByRole('dialog', { name: 'Thiết kế đã lưu' });
+      await user.type(within(dialog).getByLabelText('Tên thiết kế'), 'Xe App');
+      await user.click(within(dialog).getByRole('button', { name: 'Lưu' }));
+
+      await waitFor(() =>
+        expect(useSavedDesignsStore.getState().designs.map((d) => d.name)).toEqual(['Xe App']),
+      );
+      expect(useVehicleStore.getState().dirty).toBe(false);
+      expect(fireBeforeUnload()).toBe(false);
+    });
+
+    it('khởi động lại nạp thiết kế đang mở ở phiên trước', () => {
+      useVehicleStore.getState().applyChange('barrel', 'barrel-long');
+      const saved = useSavedDesignsStore.getState().saveAs('Phiên trước')!;
+      useVehicleStore.getState().reset();
+
+      render(<App />);
+      expect(useSavedDesignsStore.getState().currentId).toBe(saved.id);
+      expect(variantInSlot(useVehicleStore.getState().configuration, 'barrel')).toBe('barrel-long');
+      expect(useVehicleStore.getState().dirty).toBe(false);
+    });
   });
 
   describe('màn hình nhỏ', () => {
