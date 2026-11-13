@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "modelUrl": "/models/tank.glb",
+  "maxFileSizeBytes": 10485760,
+  "nodes": {
+    "Hull": "hull",
+    "Turret": "turret",
+    "Barrel": "barrel",
+    "Mantlet": "mantlet",
+    "Track_L": "track-left",
+    "Track_R": "track-right",
+    "Wheels_L": "wheels-left",
+    "Wheels_R": "wheels-right",
+    "Hatch": "hatch",
+    "Antenna": "antenna"
+  },
+  "pivots": {
+    "turret": [0, 1.1, 0],
+    "barrel": [0, 1.45, 0.9],
+    "hatch": [0, 1.7, -0.2]
+  }
+}
