@@ -1,0 +1,244 @@
+/*
+ * Báo cáo cấu hình xe tăng — hiển thị trên màn hình (overlay) và khi in (khổ A4).
+ * Dùng CSS thuần (không phụ thuộc Tailwind) để bản in ổn định giữa các trình duyệt.
+ */
+
+.report-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 24px 0;
+}
+
+.report-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 210mm;
+  max-width: 100%;
+  margin: 0 auto 12px;
+}
+
+.report-toolbar button {
+  border: 1px solid #6b7d2c;
+  border-radius: 6px;
+  background: #1f2326;
+  color: #f3f4f1;
+  padding: 6px 12px;
+  font: 13px system-ui, sans-serif;
+  cursor: pointer;
+}
+
+.report-toolbar button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+/* "Trang giấy" A4 trên màn hình: 210mm × tối thiểu 297mm, lề 15mm. */
+.report-page {
+  box-sizing: border-box;
+  width: 210mm;
+  max-width: 100%;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 15mm;
+  background: #fff;
+  color: #1a1a1a;
+  font: 10.5pt/1.45 system-ui, 'Segoe UI', Roboto, sans-serif;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.report-page h1 {
+  margin: 0 0 2mm;
+  font-size: 18pt;
+}
+
+.report-page h2 {
+  margin: 0 0 2mm;
+  padding-bottom: 1mm;
+  border-bottom: 1px solid #c8c8c0;
+  font-size: 12.5pt;
+  color: #3d4a17;
+}
+
+.report-subtitle {
+  margin: 0 0 4mm;
+  color: #555;
+  font-size: 9.5pt;
+}
+
+.report-section {
+  margin: 0 0 6mm;
+}
+
+.report-section p {
+  margin: 0 0 2mm;
+}
+
+.report-disclaimer {
+  border: 1px solid #b5893a;
+  border-radius: 4px;
+  background: #fbf6ea;
+  padding: 2mm 3mm;
+  font-size: 9.5pt;
+  font-style: italic;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 9.5pt;
+}
+
+.report-table th,
+.report-table td {
+  border: 1px solid #d6d6ce;
+  padding: 1mm 2mm;
+  text-align: left;
+  vertical-align: top;
+}
+
+.report-table th {
+  background: #eef0e6;
+}
+
+.report-table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.report-bar {
+  display: inline-block;
+  width: 40mm;
+  height: 2.5mm;
+  margin-left: 2mm;
+  vertical-align: middle;
+  background: #e2e2da;
+}
+
+.report-bar > span {
+  display: block;
+  height: 100%;
+  background: #6b7d2c;
+}
+
+.report-dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 1mm 4mm;
+  margin: 0;
+}
+
+.report-dl dt {
+  color: #555;
+}
+
+.report-dl dd {
+  margin: 0;
+}
+
+.report-figure {
+  margin: 0;
+  text-align: center;
+}
+
+.report-figure img {
+  max-width: 100%;
+  max-height: 110mm;
+  border: 1px solid #d6d6ce;
+  object-fit: contain;
+}
+
+.report-figure figcaption,
+.report-muted {
+  color: #666;
+  font-size: 9pt;
+}
+
+.report-swatch {
+  display: inline-block;
+  width: 4mm;
+  height: 4mm;
+  margin-right: 2mm;
+  vertical-align: middle;
+  border: 1px solid #999;
+}
+
+.report-list {
+  margin: 0;
+  padding-left: 5mm;
+}
+
+/* Khổ A4 dọc; khi báo cáo đang mở (body.report-printing), ẩn ứng dụng phía sau lúc in. */
+@page {
+  size: A4 portrait;
+  margin: 12mm;
+}
+
+@media print {
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  body.report-printing > *:not(.report-overlay) {
+    display: none !important;
+  }
+
+  .report-overlay {
+    position: static;
+    overflow: visible;
+    background: none;
+    padding: 0;
+  }
+
+  .report-toolbar {
+    display: none !important;
+  }
+
+  /* Lề trang do @page đảm nhiệm. */
+  .report-page {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .report-section,
+  .report-figure,
+  .report-table tr,
+  .report-disclaimer {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .report-page h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  /* Bảng dài vẫn được phép tách trang, lặp lại tiêu đề cột. */
+  .report-section--long {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .report-table thead {
+    display: table-header-group;
+  }
+
+  .report-section,
+  .report-bar > span,
+  .report-swatch,
+  .report-disclaimer,
+  .report-table th {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
