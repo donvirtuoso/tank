@@ -1,0 +1,95 @@
+{
+  "terms": {
+    "hull": {
+      "term": { "vi": "thân xe", "en": "hull" },
+      "definition": {
+        "vi": "Khung vỏ bọc thép chính của xe tăng, chứa kíp lái, động cơ và gắn hệ thống bánh xích.",
+        "en": "The main armored body of the tank that houses the crew and engine and carries the running gear."
+      }
+    },
+    "turret": {
+      "term": { "vi": "tháp pháo", "en": "turret" },
+      "definition": {
+        "vi": "Khối xoay đặt trên thân xe, mang pháo chính và cho phép ngắm bắn 360°.",
+        "en": "The rotating structure on top of the hull that carries the main gun and allows 360° aiming."
+      }
+    },
+    "main-gun": {
+      "term": { "vi": "pháo chính", "en": "main gun" },
+      "definition": {
+        "vi": "Vũ khí chính của xe tăng, gắn trên tháp pháo.",
+        "en": "The tank's primary weapon, mounted in the turret."
+      }
+    },
+    "tracks": {
+      "term": { "vi": "xích", "en": "tracks" },
+      "definition": {
+        "vi": "Dải mắt xích liên tục giúp phân bố trọng lượng và di chuyển trên địa hình khó.",
+        "en": "Continuous bands of linked plates that spread the weight and let the tank cross rough terrain."
+      }
+    },
+    "road-wheels": {
+      "term": { "vi": "bánh chịu tải", "en": "road wheels" },
+      "definition": {
+        "vi": "Các bánh xe nằm trên xích, đỡ trọng lượng xe và nối với hệ thống treo.",
+        "en": "Wheels running on the inside of the track that carry the vehicle's weight and connect to the suspension."
+      }
+    },
+    "sprocket": {
+      "term": { "vi": "bánh sao chủ động", "en": "drive sprocket" },
+      "definition": {
+        "vi": "Bánh răng nhận lực từ động cơ và kéo xích chuyển động.",
+        "en": "The toothed wheel driven by the engine that pulls the track around."
+      }
+    },
+    "powerpack": {
+      "term": { "vi": "cụm động lực", "en": "powerpack" },
+      "definition": {
+        "vi": "Cụm gồm động cơ và hộp số, thường đặt ở phía sau thân xe.",
+        "en": "The combined engine and transmission unit, usually placed at the rear of the hull."
+      }
+    },
+    "caliber": {
+      "term": { "vi": "cỡ nòng", "en": "caliber" },
+      "definition": {
+        "vi": "Đường kính trong của nòng pháo, thường tính bằng milimét.",
+        "en": "The internal diameter of the gun barrel, usually given in millimetres."
+      }
+    },
+    "armor": {
+      "term": { "vi": "giáp", "en": "armor" },
+      "definition": {
+        "vi": "Lớp vật liệu bảo vệ xe và kíp lái khỏi đạn và mảnh vỡ.",
+        "en": "Protective material that shields the vehicle and crew from projectiles and fragments."
+      }
+    },
+    "mantlet": {
+      "term": { "vi": "mặt nạ pháo", "en": "gun mantlet" },
+      "definition": {
+        "vi": "Tấm giáp dày bao quanh gốc pháo, cho phép pháo nâng hạ mà vẫn được che chắn.",
+        "en": "The thick armor plate around the base of the gun that protects it while it elevates."
+      }
+    },
+    "traverse": {
+      "term": { "vi": "quay ngang", "en": "traverse" },
+      "definition": {
+        "vi": "Chuyển động xoay tháp pháo theo phương ngang để đổi hướng ngắm.",
+        "en": "The horizontal rotation of the turret to change aiming direction."
+      }
+    },
+    "turret-ring": {
+      "term": { "vi": "vành tháp pháo", "en": "turret ring" },
+      "definition": {
+        "vi": "Vòng bi lớn nối tháp pháo với thân xe, cho phép tháp pháo xoay.",
+        "en": "The large bearing ring that joins the turret to the hull and lets it rotate."
+      }
+    },
+    "exploded-view": {
+      "term": { "vi": "chế độ tách rời", "en": "exploded view" },
+      "definition": {
+        "vi": "Cách hiển thị các bộ phận được tách xa nhau để thấy rõ cấu tạo và vị trí lắp ráp.",
+        "en": "A display mode that pulls parts apart to reveal structure and how they fit together."
+      }
+    }
+  }
+}
