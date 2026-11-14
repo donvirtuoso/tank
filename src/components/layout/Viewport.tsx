@@ -29,7 +29,7 @@ export default function Viewport() {
       // Canvas 3D trong vùng này được dùng để chụp thumbnail thiết kế.
       data-design-thumbnail=""
       className="relative h-full w-full overflow-hidden bg-gunmetal-950">
-      <TankScene environment={SCENE_ENVIRONMENT[environment]} showToolbar={false} />
+      <TankScene environment={SCENE_ENVIRONMENT[environment]} showToolbar={false} useGlb />
 
       <dl className="pointer-events-none absolute left-3 top-3 grid grid-cols-[auto_auto] gap-x-3 gap-y-1 rounded border border-gunmetal-700 bg-gunmetal-900/80 px-3 py-2 font-mono text-[11px] backdrop-blur">
         <dt className="text-gunmetal-400">{t.viewport.mode}</dt>

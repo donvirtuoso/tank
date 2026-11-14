@@ -1,7 +1,7 @@
 {
   "version": 1,
   "modelUrl": "/models/tank.glb",
-  "maxFileSizeBytes": 10485760,
+  "maxFileSizeBytes": 33554432,
   "nodes": {
     "Hull": "hull",
     "Turret": "turret",

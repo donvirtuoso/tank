@@ -1,11 +1,13 @@
 import { ContactShadows, Grid } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { Suspense, useCallback, useMemo, useState, type CSSProperties } from 'react';
+import { Suspense, useCallback, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { Box3, Vector3, type Group } from 'three';
 import { CameraController, type CameraCommand } from './CameraController';
 import { CAMERA_PRESET_IDS, CAMERA_PRESET_LABELS, type CameraPresetId, type Vec3Tuple } from './cameraPresets';
 import { computeBoundingRadius, computeTankLayout, resolveVariant, type DeepPartial, type TankArticulation, type TankVariantConfig } from './components/variant';
 import { ENVIRONMENT_LABELS, ENVIRONMENT_PRESET_IDS, SceneEnvironment, type EnvironmentPresetId } from './Environment';
 import { Lighting } from './Lighting';
+import { GlbTankModel, type GlbLoadStatus } from './loaders/glbAdapter';
 import { ProceduralTank } from './ProceduralTank';
 import type { SceneRegistry } from './sceneRegistry';
 
@@ -30,6 +32,11 @@ export interface TankSceneProps {
   /** Show the built-in overlay with environment + camera preset buttons. */
   showToolbar?: boolean;
   registry?: SceneRegistry;
+  /**
+   * Thử nạp mô hình GLB theo `glbNodeMapping.json` (`/models/tank.glb`); thiếu/lỗi thì dùng
+   * mô hình procedural. Mặc định: false (luôn procedural).
+   */
+  useGlb?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -43,6 +50,7 @@ export function TankScene({
   cameraCommand,
   showToolbar = true,
   registry,
+  useGlb = false,
   className,
   style,
 }: TankSceneProps) {
@@ -72,6 +80,18 @@ export function TankScene({
     };
   }, [variantKey]);
 
+  // GlbTankModel nhận fallback dạng component không props; giữ identity ổn định để không remount.
+  const Fallback = useMemo(
+    () =>
+      function ProceduralFallback() {
+        return <ProceduralTank variant={variant} articulation={articulation} registry={registry} />;
+      },
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- variant so sánh theo nội dung qua variantKey
+    [variantKey, articulation, registry],
+  );
+  const [glbLoaded, setGlbLoaded] = useState(false);
+  const handleGlbStatus = useCallback((status: GlbLoadStatus) => setGlbLoaded(status.state === 'loaded'), []);
+
   return (
     <div className={className} style={{ position: 'relative', width: '100%', height: '100%', ...style }}>
       <Canvas shadows dpr={[1, 2]} camera={{ fov: 40, near: 0.1, far: 500, position: [10, 6, 12] }}>
@@ -79,7 +99,13 @@ export function TankScene({
           <SceneEnvironment preset={env} />
         </Suspense>
         <Lighting environment={env} shadowExtent={Math.max(5, radius * 1.2)} />
-        <ProceduralTank variant={variant} articulation={articulation} registry={registry} />
+        {useGlb ? (
+          <FitToGround active={glbLoaded} targetLength={radius * 1.8}>
+            <GlbTankModel fallback={Fallback} onStatusChange={handleGlbStatus} />
+          </FitToGround>
+        ) : (
+          <ProceduralTank variant={variant} articulation={articulation} registry={registry} />
+        )}
         <ContactShadows position={[0, 0.005, 0]} scale={radius * 3.2} far={3} blur={2.2} opacity={env === 'hangar' ? 0.7 : 0.55} resolution={512} />
         <mesh name="Floor" rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.002, 0]} receiveShadow>
           <circleGeometry args={[60, 64]} />
@@ -104,6 +130,32 @@ export function TankScene({
       )}
     </div>
   );
+}
+
+/**
+ * Mô hình GLB tải về có tỉ lệ/gốc toạ độ tuỳ ý. Khi `active`, co giãn để cạnh ngang dài nhất bằng
+ * `targetLength`, căn giữa theo X/Z và đặt đáy lên mặt đất (y = 0). Khi không active: giữ nguyên.
+ */
+function FitToGround({ active, targetLength, children }: { active: boolean; targetLength: number; children: ReactNode }) {
+  const ref = useRef<Group>(null);
+  useLayoutEffect(() => {
+    const group = ref.current;
+    if (!group) return;
+    group.scale.setScalar(1);
+    group.position.set(0, 0, 0);
+    if (!active) return;
+    group.updateWorldMatrix(true, true);
+    const box = new Box3().setFromObject(group);
+    if (box.isEmpty()) return;
+    const size = box.getSize(new Vector3());
+    const longest = Math.max(size.x, size.z);
+    if (!(longest > 0)) return;
+    const s = targetLength / longest;
+    const center = box.getCenter(new Vector3());
+    group.scale.setScalar(s);
+    group.position.set(-center.x * s, -box.min.y * s, -center.z * s);
+  }, [active, targetLength]);
+  return <group ref={ref}>{children}</group>;
 }
 
 /** Chooses whichever of the external/local commands was issued last. */

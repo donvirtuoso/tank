@@ -27,3 +27,4 @@ Thumbs.db
 
 # Model GLB tải về (nặng, có thể vướng bản quyền)
 tank_model/
+public/models/*.glb
