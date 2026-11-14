@@ -58,6 +58,11 @@ export const viMessages = {
     mode: 'Chế độ',
     environment: 'Môi trường',
     displayMode: 'Hiển thị',
+    model: 'Mô hình',
+    modelProcedural: 'Dựng sẵn',
+    modelGlb: 'File GLB',
+    modelToggle: 'Đổi mô hình hiển thị',
+    glbNote: 'Mô hình GLB chưa tách bộ phận: chọn, tháo rời và mở nắp chỉ hoạt động với mô hình dựng sẵn.',
   },
   toolbar: {
     label: 'Thanh công cụ',

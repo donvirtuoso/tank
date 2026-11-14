@@ -9,6 +9,7 @@ import { ENVIRONMENT_LABELS, ENVIRONMENT_PRESET_IDS, SceneEnvironment, type Envi
 import { Lighting } from './Lighting';
 import { GlbTankModel, type GlbLoadStatus } from './loaders/glbAdapter';
 import { ProceduralTank } from './ProceduralTank';
+import { SceneRig } from './SceneRig';
 import type { SceneRegistry } from './sceneRegistry';
 
 const FLOOR_COLOR: Readonly<Record<EnvironmentPresetId, string>> = {
@@ -37,6 +38,11 @@ export interface TankSceneProps {
    * mô hình procedural. Mặc định: false (luôn procedural).
    */
   useGlb?: boolean;
+  /**
+   * Nối scene với các panel: chọn bộ phận bằng chuột, focus camera, exploded view, cơ cấu,
+   * khung dây / X-quang (xem `SceneRig`). Mặc định: false.
+   */
+  interactive?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -51,6 +57,7 @@ export function TankScene({
   showToolbar = true,
   registry,
   useGlb = false,
+  interactive = false,
   className,
   style,
 }: TankSceneProps) {
@@ -99,13 +106,15 @@ export function TankScene({
           <SceneEnvironment preset={env} />
         </Suspense>
         <Lighting environment={env} shadowExtent={Math.max(5, radius * 1.2)} />
-        {useGlb ? (
-          <FitToGround active={glbLoaded} targetLength={radius * 1.8}>
-            <GlbTankModel fallback={Fallback} onStatusChange={handleGlbStatus} />
-          </FitToGround>
-        ) : (
-          <ProceduralTank variant={variant} articulation={articulation} registry={registry} />
-        )}
+        <MaybeRig interactive={interactive} modelKey={`${variantKey}|${String(useGlb)}|${String(glbLoaded)}`} registry={registry}>
+          {useGlb ? (
+            <FitToGround active={glbLoaded} targetLength={radius * 1.8}>
+              <GlbTankModel fallback={Fallback} onStatusChange={handleGlbStatus} />
+            </FitToGround>
+          ) : (
+            <ProceduralTank variant={variant} articulation={articulation} registry={registry} />
+          )}
+        </MaybeRig>
         <ContactShadows position={[0, 0.005, 0]} scale={radius * 3.2} far={3} blur={2.2} opacity={env === 'hangar' ? 0.7 : 0.55} resolution={512} />
         <mesh name="Floor" rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.002, 0]} receiveShadow>
           <circleGeometry args={[60, 64]} />
@@ -129,6 +138,26 @@ export function TankScene({
         <SceneToolbar environment={env} onEnvironmentChange={setEnv} onPreset={requestPreset} />
       )}
     </div>
+  );
+}
+
+function MaybeRig({
+  interactive,
+  modelKey,
+  registry,
+  children,
+}: {
+  interactive: boolean;
+  modelKey: string;
+  registry?: SceneRegistry;
+  children: ReactNode;
+}) {
+  return interactive ? (
+    <SceneRig modelKey={modelKey} registry={registry}>
+      {children}
+    </SceneRig>
+  ) : (
+    <>{children}</>
   );
 }
 

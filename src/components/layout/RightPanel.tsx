@@ -1,6 +1,11 @@
+import { AssemblyControls } from '@/features/assembly/AssemblyControls';
+import { PROCEDURAL_MECHANISMS } from '@/features/assembly/useMechanismAnimator';
+import { StatsPanel } from '@/features/configurator/StatsPanel';
+import { ComponentInfoPanel } from '@/features/viewer/ComponentInfoPanel';
 import { useT } from '@/i18n';
+import { TANK_CATALOG, TANK_GROUP_LABELS } from '@/scene/tankCatalog';
 import { useUiStore } from '@/stores/useUiStore';
-import { useViewerStore } from '@/stores/useViewerStore';
+import { useViewerStore, type Mode } from '@/stores/useViewerStore';
 import { CollapsiblePanel } from './CollapsiblePanel';
 
 export function RightPanel() {
@@ -19,7 +24,20 @@ export function RightPanel() {
       collapseLabel={t.panels.collapseRight}
       expandLabel={t.panels.expandRight}
     >
-      <p className="text-xs text-gunmetal-400">{copy.rightEmpty}</p>
+      <RightContent mode={mode} empty={copy.rightEmpty} />
     </CollapsiblePanel>
   );
+}
+
+function RightContent({ mode, empty }: { mode: Mode; empty: string }) {
+  switch (mode) {
+    case 'explore':
+      return <ComponentInfoPanel className="panel-raw" components={TANK_CATALOG} groupLabels={TANK_GROUP_LABELS} />;
+    case 'assembly':
+      return <AssemblyControls className="panel-raw assembly-controls" mechanisms={PROCEDURAL_MECHANISMS} />;
+    case 'design':
+      return <StatsPanel className="text-xs" />;
+    case 'compare':
+      return <p className="text-xs text-gunmetal-400">{empty}</p>;
+  }
 }

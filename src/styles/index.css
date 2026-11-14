@@ -45,3 +45,54 @@
     background-position: center;
   }
 }
+
+/*
+ * Kiểu cơ bản cho các panel tính năng viết bằng HTML thuần (cây bộ phận, thông tin bộ phận,
+ * hướng dẫn và điều khiển lắp ráp) khi gắn vào cột trái / phải.
+ */
+@layer components {
+  .panel-raw {
+    @apply flex flex-col gap-2 text-xs text-gunmetal-200;
+  }
+  .panel-raw h2,
+  .panel-raw h3 {
+    @apply mt-1 text-[11px] font-semibold uppercase tracking-wide text-olive-300;
+  }
+  .panel-raw section,
+  .panel-raw fieldset {
+    @apply flex flex-col gap-1.5 rounded border border-gunmetal-800 p-2;
+  }
+  .panel-raw legend {
+    @apply px-1 text-gunmetal-400;
+  }
+  .panel-raw label {
+    @apply flex items-center gap-1.5;
+  }
+  .panel-raw input[type='search'],
+  .panel-raw input[type='text'],
+  .panel-raw select {
+    @apply w-full rounded border border-gunmetal-700 bg-gunmetal-900 px-2 py-1 text-gunmetal-100;
+  }
+  .panel-raw input[type='range'] {
+    @apply w-full accent-olive-500;
+  }
+  .panel-raw button {
+    @apply rounded border border-gunmetal-700 bg-gunmetal-800 px-2 py-0.5 text-gunmetal-100 transition-colors hover:bg-gunmetal-700 disabled:opacity-40;
+  }
+  .panel-raw ul {
+    @apply flex flex-col gap-0.5;
+  }
+  .panel-raw ul ul {
+    @apply ml-3 border-l border-gunmetal-800 pl-2;
+  }
+  .panel-raw [aria-selected='true'],
+  .panel-raw [aria-current='true'] {
+    @apply text-brass-300;
+  }
+  .assembly-controls__row {
+    @apply flex items-center justify-between gap-2;
+  }
+  .assembly-controls__buttons {
+    @apply flex flex-wrap gap-1;
+  }
+}

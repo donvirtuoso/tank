@@ -57,6 +57,11 @@ export const enMessages: Dictionary = {
     mode: 'Mode',
     environment: 'Environment',
     displayMode: 'Display',
+    model: 'Model',
+    modelProcedural: 'Built-in',
+    modelGlb: 'GLB file',
+    modelToggle: 'Switch displayed model',
+    glbNote: 'The GLB model has no separated parts: selecting, exploding and opening hatches only work with the built-in model.',
   },
   toolbar: {
     label: 'Toolbar',

@@ -10,6 +10,9 @@ import { App } from './App';
 vi.mock('@/scene/TankScene', () => ({
   TankScene: () => <canvas data-testid="tank-scene" />,
 }));
+vi.mock('@/features/comparison/CompareView', () => ({
+  CompareView: () => <div data-testid="compare-view" />,
+}));
 
 function modeButton(name: string) {
   const nav = screen.getByRole('navigation', { name: 'Chế độ làm việc' });
@@ -25,7 +28,8 @@ describe('App', () => {
     expect(screen.getByRole('heading', { name: 'Bộ phận' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Thông tin chi tiết' })).toBeInTheDocument();
     expect(screen.getByRole('toolbar', { name: 'Thanh công cụ' })).toBeInTheDocument();
-    expect(await screen.findByRole('region', { name: 'Khung nhìn 3D' })).toBeInTheDocument();
+    // Viewport tải lười (chunk nặng): chạy cả bộ test song song có thể mất hơn 1 giây.
+    expect(await screen.findByRole('region', { name: 'Khung nhìn 3D' }, { timeout: 5000 })).toBeInTheDocument();
     expect(document.documentElement.lang).toBe('vi');
   });
 
