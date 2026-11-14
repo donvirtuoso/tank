@@ -7,10 +7,10 @@ import { CAMERA_PRESET_IDS, CAMERA_PRESET_LABELS, type CameraPresetId, type Vec3
 import { computeBoundingRadius, computeTankLayout, resolveVariant, type DeepPartial, type TankArticulation, type TankVariantConfig } from './components/variant';
 import { ENVIRONMENT_LABELS, ENVIRONMENT_PRESET_IDS, SceneEnvironment, type EnvironmentPresetId } from './Environment';
 import { Lighting } from './Lighting';
-import { GlbTankModel, type GlbLoadStatus } from './loaders/glbAdapter';
+import { GlbTankModel, type GlbHandles, type GlbLoadStatus } from './loaders/glbAdapter';
 import { ProceduralTank } from './ProceduralTank';
 import { SceneRig } from './SceneRig';
-import type { SceneRegistry } from './sceneRegistry';
+import { sceneRegistry, type SceneRegistry } from './sceneRegistry';
 
 const FLOOR_COLOR: Readonly<Record<EnvironmentPresetId, string>> = {
   daylight: '#8f8a78',
@@ -38,6 +38,10 @@ export interface TankSceneProps {
    * mô hình procedural. Mặc định: false (luôn procedural).
    */
   useGlb?: boolean;
+  /** URL file GLB (vd: object URL của file người dùng nhập); mặc định lấy theo glbNodeMapping.json. */
+  glbUrl?: string;
+  /** Giới hạn kích thước file GLB (byte); mặc định lấy theo glbNodeMapping.json. */
+  glbMaxBytes?: number;
   /**
    * Nối scene với các panel: chọn bộ phận bằng chuột, focus camera, exploded view, cơ cấu,
    * khung dây / X-quang (xem `SceneRig`). Mặc định: false.
@@ -57,6 +61,8 @@ export function TankScene({
   showToolbar = true,
   registry,
   useGlb = false,
+  glbUrl,
+  glbMaxBytes,
   interactive = false,
   className,
   style,
@@ -99,6 +105,21 @@ export function TankScene({
   const [glbLoaded, setGlbLoaded] = useState(false);
   const handleGlbStatus = useCallback((status: GlbLoadStatus) => setGlbLoaded(status.state === 'loaded'), []);
 
+  // Đăng ký bộ phận của GLB vào registry (như mô hình dựng sẵn) để chọn / tháo rời / hướng dẫn dùng được.
+  const targetRegistry = registry ?? sceneRegistry;
+  const glbRegistered = useRef<GlbHandles>({});
+  const handleGlbHandles = useCallback(
+    (handles: GlbHandles) => {
+      for (const [id, obj] of Object.entries(glbRegistered.current)) targetRegistry.unregister(id, obj);
+      for (const [id, obj] of Object.entries(handles)) {
+        obj.userData.componentId = id;
+        targetRegistry.register(id, obj);
+      }
+      glbRegistered.current = handles;
+    },
+    [targetRegistry],
+  );
+
   return (
     <div className={className} style={{ position: 'relative', width: '100%', height: '100%', ...style }}>
       <Canvas shadows dpr={[1, 2]} camera={{ fov: 40, near: 0.1, far: 500, position: [10, 6, 12] }}>
@@ -106,10 +127,19 @@ export function TankScene({
           <SceneEnvironment preset={env} />
         </Suspense>
         <Lighting environment={env} shadowExtent={Math.max(5, radius * 1.2)} />
-        <MaybeRig interactive={interactive} modelKey={`${variantKey}|${String(useGlb)}|${String(glbLoaded)}`} registry={registry}>
+        <MaybeRig
+          interactive={interactive}
+          modelKey={`${variantKey}|${String(useGlb)}|${glbUrl ?? ''}|${String(glbLoaded)}`}
+          registry={registry}>
           {useGlb ? (
             <FitToGround active={glbLoaded} targetLength={radius * 1.8}>
-              <GlbTankModel fallback={Fallback} onStatusChange={handleGlbStatus} />
+              <GlbTankModel
+                fallback={Fallback}
+                url={glbUrl}
+                maxFileSizeBytes={glbMaxBytes}
+                onStatusChange={handleGlbStatus}
+                onHandles={handleGlbHandles}
+              />
             </FitToGround>
           ) : (
             <ProceduralTank variant={variant} articulation={articulation} registry={registry} />

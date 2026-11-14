@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react';
+import { useCallback, useMemo, useRef, useSyncExternalStore } from 'react';
 import type { Object3D } from 'three';
 
 export type RegistryListener = (componentId: string, object: Object3D | null) => void;
@@ -91,4 +91,14 @@ export function useRegisterObject<T extends Object3D>(
     },
     [componentId, registry],
   );
+}
+
+/**
+ * Tập id bộ phận đang có trong registry, cập nhật khi mô hình đổi (dựng sẵn ↔ GLB).
+ * Dùng ngoài Canvas, ví dụ để lọc cây bộ phận.
+ */
+export function useRegisteredIds(registry: SceneRegistry = sceneRegistry): ReadonlySet<string> {
+  const subscribe = useCallback((onChange: () => void) => registry.subscribe(onChange), [registry]);
+  const key = useSyncExternalStore(subscribe, () => registry.ids().sort().join('|'));
+  return useMemo(() => new Set(key ? key.split('|') : []), [key]);
 }

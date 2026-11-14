@@ -3,7 +3,9 @@ import { AssemblyTutorial, type TutorialStepChange } from '@/features/assembly/A
 import { DesignPanel } from '@/features/configurator/DesignPanel';
 import { ComponentTree } from '@/features/viewer/ComponentTree';
 import { useT } from '@/i18n';
-import { TANK_CATALOG, TANK_CATALOG_EXPANDED, TANK_GROUP_LABELS, TUTORIAL_TARGETS, tutorialTargetIds } from '@/scene/tankCatalog';
+import { sceneRegistry } from '@/scene/sceneRegistry';
+import { TANK_CATALOG_EXPANDED, TANK_GROUP_LABELS, TUTORIAL_TARGETS, tutorialTargetIds } from '@/scene/tankCatalog';
+import { useSceneCatalog } from '@/scene/useSceneCatalog';
 import { useSceneFxStore } from '@/stores/useSceneFxStore';
 import { useSelectionStore } from '@/stores/useSelectionStore';
 import { useUiStore } from '@/stores/useUiStore';
@@ -32,12 +34,13 @@ export function LeftPanel() {
 }
 
 function LeftContent({ mode, empty }: { mode: Mode; empty: string }) {
+  const catalog = useSceneCatalog();
   switch (mode) {
     case 'explore':
       return (
         <ComponentTree
           className="panel-raw"
-          components={TANK_CATALOG}
+          components={catalog}
           groupLabels={TANK_GROUP_LABELS}
           defaultExpandedIds={TANK_CATALOG_EXPANDED}
         />
@@ -67,7 +70,7 @@ function AssemblyGuide() {
   );
 
   const onHighlight = (target: string | null) => {
-    const id = tutorialTargetIds(target)[0];
+    const id = tutorialTargetIds(target).find((t) => sceneRegistry.has(t));
     const selection = useSelectionStore.getState();
     if (!id) {
       selection.clearSelection();

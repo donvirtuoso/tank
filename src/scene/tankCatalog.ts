@@ -36,7 +36,36 @@ export const TANK_CATALOG: readonly ComponentInfo[] = [
   { id: 'commander-hatch', nameVi: 'Nắp trưởng xe', nameEn: "Commander's hatch", group: 'turret', parentId: 'turret' },
   { id: 'smoke-launchers', nameVi: 'Ống phóng lựu khói', nameEn: 'Smoke launchers', group: 'turret', parentId: 'turret' },
   { id: 'antenna', nameVi: 'Ăng-ten', nameEn: 'Antenna', group: 'accessories', parentId: 'turret' },
+  // Bộ phận chỉ có ở model GLB (khối gộp cả hai bên, không tách trái/phải).
+  { id: 'lower-hull', nameVi: 'Thân dưới', nameEn: 'Lower hull', group: 'hull', parentId: null, education: 'Phần vỏ thép phía dưới, nơi gắn hệ chạy.' },
+  { id: 'upper-hull', nameVi: 'Thân trên', nameEn: 'Upper hull', group: 'hull', parentId: 'lower-hull', education: 'Nóc thân xe, chứa khoang chiến đấu và khoang động cơ.', relatedIds: ['turret'] },
+  { id: 'fenders', nameVi: 'Chắn bùn', nameEn: 'Fenders', group: 'hull', parentId: 'lower-hull', education: 'Tấm che phía trên dải xích hai bên.' },
+  { id: 'road-wheels', nameVi: 'Bánh chịu tải', nameEn: 'Road wheels', group: 'mobility', parentId: 'lower-hull', education: 'Đỡ trọng lượng xe và lăn trên dải xích.', relatedIds: ['tracks'] },
+  { id: 'tracks', nameVi: 'Dải xích', nameEn: 'Tracks', group: 'mobility', parentId: 'lower-hull', education: 'Dải xích giúp xe đi trên địa hình mềm, gồ ghề.', relatedIds: ['road-wheels'] },
+  { id: 'mantlet', nameVi: 'Ụ pháo', nameEn: 'Gun mantlet', group: 'turret', parentId: 'turret', education: 'Tấm giáp che chỗ nòng pháo đi ra khỏi tháp pháo.', relatedIds: ['gun'] },
+  { id: 'remote-weapon', nameVi: 'Cụm thiết bị trên nóc tháp', nameEn: 'Turret roof module', group: 'turret', parentId: 'turret', education: 'Kính ngắm và vũ khí điều khiển từ xa đặt trên nóc tháp pháo.' },
+  { id: 'roof-mg', nameVi: 'Súng máy trên nóc', nameEn: 'Roof machine gun', group: 'turret', parentId: 'turret', education: 'Súng máy phụ để tự vệ ở cự ly gần.' },
 ];
+
+/**
+ * Lọc danh mục theo các bộ phận thực sự có trong scene (mô hình dựng sẵn hay GLB khác nhau).
+ * Bộ phận có cha không tồn tại sẽ được gắn lên tổ tiên gần nhất còn lại.
+ */
+export function filterCatalog(catalog: readonly ComponentInfo[], present: ReadonlySet<string>): ComponentInfo[] {
+  const byId = new Map(catalog.map((c) => [c.id, c]));
+  const nearestKept = (parentId: string | null | undefined): string | null => {
+    let id = parentId ?? null;
+    while (id && !present.has(id)) id = byId.get(id)?.parentId ?? null;
+    return id;
+  };
+  return catalog
+    .filter((c) => present.has(c.id))
+    .map((c) => ({
+      ...c,
+      parentId: nearestKept(c.parentId),
+      relatedIds: c.relatedIds?.filter((r) => present.has(r)),
+    }));
+}
 
 export const TANK_GROUP_LABELS: Readonly<Record<string, string>> = {
   hull: 'Thân xe',
@@ -46,15 +75,18 @@ export const TANK_GROUP_LABELS: Readonly<Record<string, string>> = {
 };
 
 /** Bộ phận ở cấp gốc được mở sẵn trong cây. */
-export const TANK_CATALOG_EXPANDED = ['chassis', 'hull', 'turret'];
+export const TANK_CATALOG_EXPANDED = ['chassis', 'hull', 'turret', 'lower-hull'];
 
-/** `target` của bước hướng dẫn lắp ráp (lessons.json) → id bộ phận trong scene. */
+/**
+ * `target` của bước hướng dẫn lắp ráp (lessons.json) → id bộ phận trong scene
+ * (gồm cả id của mô hình dựng sẵn lẫn GLB; id không có trong scene sẽ bị bỏ qua).
+ */
 export const TUTORIAL_TARGETS: Readonly<Record<string, readonly string[]>> = {
-  hull: ['hull'],
-  'road-wheels': ['road-wheels-left', 'road-wheels-right'],
-  tracks: ['track-left', 'track-right'],
+  hull: ['hull', 'upper-hull', 'lower-hull', 'fenders'],
+  'road-wheels': ['road-wheels-left', 'road-wheels-right', 'road-wheels'],
+  tracks: ['track-left', 'track-right', 'tracks'],
   powerpack: ['powertrain'],
-  turret: ['turret'],
+  turret: ['turret', 'mantlet'],
   'main-gun': ['gun'],
 };
 
@@ -81,4 +113,12 @@ export const TANK_EXPLODE_PARTS: readonly Omit<ExplodePartSpec, 'bounds'>[] = [
   { id: 'powertrain', stage: 5, direction: UP, distance: 2.4 },
   { id: 'running-gear-left', stage: 6, distance: 1.8 },
   { id: 'running-gear-right', stage: 6, distance: 1.8 },
+  // Model GLB: các khối gộp hai bên nên tách theo hướng cố định.
+  { id: 'fenders', stage: 2, direction: UP, distance: 1.2 },
+  { id: 'remote-weapon', stage: 2, direction: UP, distance: 1 },
+  { id: 'roof-mg', stage: 2, direction: UP, distance: 1.4 },
+  { id: 'mantlet', stage: 3, direction: [0, 0, 1], distance: 1 },
+  { id: 'upper-hull', stage: 5, direction: UP, distance: 1.6 },
+  { id: 'tracks', stage: 6, direction: [1, 0, 0], distance: 3 },
+  { id: 'road-wheels', stage: 6, direction: [-1, 0, 0], distance: 3 },
 ];

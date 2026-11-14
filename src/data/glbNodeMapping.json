@@ -12,11 +12,42 @@
     "Wheels_L": "wheels-left",
     "Wheels_R": "wheels-right",
     "Hatch": "hatch",
-    "Antenna": "antenna"
+    "Antenna": "antenna",
+    "main-battle-tank_0": "lower-hull",
+    "main-battle-tank_1": "road-wheels",
+    "main-battle-tank_2": "tracks",
+    "main-battle-tank_3": "upper-hull",
+    "main-battle-tank_4": "fenders",
+    "turret_1": "mantlet",
+    "turret_2": "gun",
+    "BODY": "hull",
+    "WHEEL": "lower-hull",
+    "LIGHT": "headlights",
+    "toRRET": "turret",
+    "uPPER": "remote-weapon",
+    "DOOR": "commander-hatch",
+    "front": "gun",
+    "toRRET002": "roof-mg",
+    "LEFT": "running-gear-left",
+    "RIGHT": "running-gear-right",
+    "truck002": "track-left",
+    "truck003": "track-right"
   },
   "pivots": {
-    "turret": [0, 1.1, 0],
-    "barrel": [0, 1.45, 0.9],
-    "hatch": [0, 1.7, -0.2]
+    "turret": [
+      0,
+      1.1,
+      0
+    ],
+    "barrel": [
+      0,
+      1.45,
+      0.9
+    ],
+    "hatch": [
+      0,
+      1.7,
+      -0.2
+    ]
   }
 }

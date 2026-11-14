@@ -61,7 +61,10 @@ export const enMessages: Dictionary = {
     modelProcedural: 'Built-in',
     modelGlb: 'GLB file',
     modelToggle: 'Switch displayed model',
-    glbNote: 'The GLB model has no separated parts: selecting, exploding and opening hatches only work with the built-in model.',
+    glbNote:
+      'GLB model: only parts listed in the node mapping (glbNodeMapping.json) can be selected / exploded; hatches and turret rotation only work on the built-in model.',
+    importGlb: 'Import GLB…',
+    importGlbHint: 'Open a .glb file from this computer (max 256 MB, not kept after reloading)',
   },
   toolbar: {
     label: 'Toolbar',

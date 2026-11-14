@@ -62,7 +62,10 @@ export const viMessages = {
     modelProcedural: 'Dựng sẵn',
     modelGlb: 'File GLB',
     modelToggle: 'Đổi mô hình hiển thị',
-    glbNote: 'Mô hình GLB chưa tách bộ phận: chọn, tháo rời và mở nắp chỉ hoạt động với mô hình dựng sẵn.',
+    glbNote:
+      'Mô hình GLB: chỉ bộ phận có trong bảng ánh xạ (glbNodeMapping.json) mới chọn / tháo rời được; mở nắp và xoay tháp pháo chỉ có ở mô hình dựng sẵn.',
+    importGlb: 'Nhập GLB…',
+    importGlbHint: 'Mở một file .glb trên máy (tối đa 256 MB, không lưu lại sau khi tải lại trang)',
   },
   toolbar: {
     label: 'Thanh công cụ',

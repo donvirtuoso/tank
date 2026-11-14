@@ -3,7 +3,8 @@ import { PROCEDURAL_MECHANISMS } from '@/features/assembly/useMechanismAnimator'
 import { StatsPanel } from '@/features/configurator/StatsPanel';
 import { ComponentInfoPanel } from '@/features/viewer/ComponentInfoPanel';
 import { useT } from '@/i18n';
-import { TANK_CATALOG, TANK_GROUP_LABELS } from '@/scene/tankCatalog';
+import { TANK_GROUP_LABELS } from '@/scene/tankCatalog';
+import { useSceneCatalog } from '@/scene/useSceneCatalog';
 import { useUiStore } from '@/stores/useUiStore';
 import { useViewerStore, type Mode } from '@/stores/useViewerStore';
 import { CollapsiblePanel } from './CollapsiblePanel';
@@ -30,9 +31,10 @@ export function RightPanel() {
 }
 
 function RightContent({ mode, empty }: { mode: Mode; empty: string }) {
+  const catalog = useSceneCatalog();
   switch (mode) {
     case 'explore':
-      return <ComponentInfoPanel className="panel-raw" components={TANK_CATALOG} groupLabels={TANK_GROUP_LABELS} />;
+      return <ComponentInfoPanel className="panel-raw" components={catalog} groupLabels={TANK_GROUP_LABELS} />;
     case 'assembly':
       return <AssemblyControls className="panel-raw assembly-controls" mechanisms={PROCEDURAL_MECHANISMS} />;
     case 'design':

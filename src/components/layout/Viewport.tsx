@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type ChangeEvent } from 'react';
 import { CompareView } from '@/features/comparison/CompareView';
 import { useMechanismAnimator } from '@/features/assembly/useMechanismAnimator';
 import { useT } from '@/i18n';
@@ -21,6 +21,12 @@ const SCENE_ENVIRONMENT: Readonly<Record<Environment, EnvironmentPresetId>> = {
 };
 
 /**
+ * File GLB người dùng tự chọn trên máy được đọc thẳng từ bộ nhớ (không tải qua mạng),
+ * nên cho phép lớn hơn nhiều so với giới hạn của file mặc định trong `public/models`.
+ */
+const IMPORTED_GLB_MAX_BYTES = 256 * 1024 * 1024;
+
+/**
  * Khung nhìn trung tâm. Chế độ So sánh hiển thị hai xe cạnh nhau; các chế độ khác hiển thị
  * cấu hình đang thiết kế (kể cả bản xem thử) và nối với panel qua `SceneRig`.
  * Export default để dùng với React.lazy.
@@ -31,6 +37,21 @@ export default function Viewport() {
   const environment = useViewerStore((s) => s.environment);
   const displayMode = useViewerStore((s) => s.displayMode);
   const [useGlb, setUseGlb] = useState(false);
+  const [imported, setImported] = useState<{ url: string; name: string } | null>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  // Thu hồi object URL của file đã nhập khi đổi file hoặc rời trang.
+  useEffect(() => () => {
+    if (imported) URL.revokeObjectURL(imported.url);
+  }, [imported]);
+
+  const onImportGlb = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    setImported({ url: URL.createObjectURL(file), name: file.name });
+    setUseGlb(true);
+  };
 
   useMechanismAnimator();
   useSelectionHotkeys(mode !== 'compare');
@@ -80,6 +101,8 @@ export default function Viewport() {
         showToolbar={false}
         interactive
         useGlb={useGlb}
+        glbUrl={imported?.url}
+        glbMaxBytes={imported ? IMPORTED_GLB_MAX_BYTES : undefined}
       />
 
       <div className="pointer-events-none absolute left-3 top-3 flex flex-col items-start gap-2">
@@ -107,9 +130,24 @@ export default function Viewport() {
                   ? 'rounded bg-olive-600 px-2 py-0.5 text-gunmetal-50'
                   : 'rounded px-2 py-0.5 text-gunmetal-300 hover:bg-gunmetal-800'
               }>
-              {glb ? t.viewport.modelGlb : t.viewport.modelProcedural}
+              {glb ? (imported ? imported.name : t.viewport.modelGlb) : t.viewport.modelProcedural}
             </button>
           ))}
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            title={t.viewport.importGlbHint}
+            className="rounded border border-gunmetal-700 px-2 py-0.5 text-gunmetal-200 hover:bg-gunmetal-800">
+            {t.viewport.importGlb}
+          </button>
+          <input
+            ref={fileRef}
+            type="file"
+            accept=".glb,model/gltf-binary"
+            className="hidden"
+            aria-label={t.viewport.importGlb}
+            onChange={onImportGlb}
+          />
         </div>
         {useGlb && (
           <p className="max-w-xs rounded border border-amber-700/60 bg-gunmetal-900/85 px-2 py-1 text-[11px] text-amber-200">
