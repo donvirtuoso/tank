@@ -20,7 +20,7 @@ Bốn chế độ làm việc (chuyển qua TopBar, đồng bộ với URL hash 
 
 ```bash
 npm install          # cài dependency
-npm run dev          # chạy dev server tại http://localhost:5173
+npm run dev          # chạy dev server tại http://localhost:3333
 ```
 
 Lần đầu chạy test E2E cần cài trình duyệt cho Playwright:

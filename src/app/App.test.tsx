@@ -6,6 +6,11 @@ import { useVehicleStore, variantInSlot } from '@/stores/useVehicleStore';
 import { type Mode, useViewerStore } from '@/stores/useViewerStore';
 import { App } from './App';
 
+// jsdom không có WebGL/ResizeObserver nên không dựng được canvas R3F; test này chỉ kiểm tra layout.
+vi.mock('@/scene/TankScene', () => ({
+  TankScene: () => <canvas data-testid="tank-scene" />,
+}));
+
 function modeButton(name: string) {
   const nav = screen.getByRole('navigation', { name: 'Chế độ làm việc' });
   return within(nav).getByRole('button', { name });

@@ -10,7 +10,8 @@ export default defineConfig({
     },
   },
   server: {
-    port: 5173,
+    // 5173 is used by AI Engineering Office on this machine.
+    port: 3333,
   },
   test: {
     environment: 'jsdom',

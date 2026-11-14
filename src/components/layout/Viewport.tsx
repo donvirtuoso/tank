@@ -1,10 +1,21 @@
-import { Box } from 'lucide-react';
 import { useT } from '@/i18n';
-import { useViewerStore } from '@/stores/useViewerStore';
+import type { EnvironmentPresetId } from '@/scene/Environment';
+import { TankScene } from '@/scene/TankScene';
+import { useViewerStore, type Environment } from '@/stores/useViewerStore';
 
 /**
- * Khung nhìn trung tâm. Hiện là placeholder; canvas three.js / R3F sẽ được gắn vào đây
- * ở các task sau. Export default để dùng với React.lazy.
+ * Cảnh 3D chỉ có hai preset ánh sáng; ánh xạ môi trường của app (chọn ở BottomToolbar) sang preset gần nhất.
+ */
+const SCENE_ENVIRONMENT: Readonly<Record<Environment, EnvironmentPresetId>> = {
+  studio: 'hangar',
+  night: 'hangar',
+  desert: 'daylight',
+  forest: 'daylight',
+};
+
+/**
+ * Khung nhìn trung tâm: canvas R3F hiển thị xe tăng procedural.
+ * Export default để dùng với React.lazy.
  */
 export default function Viewport() {
   const t = useT();
@@ -15,15 +26,12 @@ export default function Viewport() {
   return (
     <section
       aria-label={t.viewport.label}
-      // Canvas 3D gắn trong vùng này sẽ được dùng để chụp thumbnail thiết kế.
+      // Canvas 3D trong vùng này được dùng để chụp thumbnail thiết kế.
       data-design-thumbnail=""
-      className="viewport-grid relative h-full w-full overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center gap-3 text-center">
-        <Box className="h-12 w-12 text-olive-500/70" aria-hidden />
-        <p className="text-sm text-gunmetal-400">{t.viewport.placeholder}</p>
-      </div>
+      className="relative h-full w-full overflow-hidden bg-gunmetal-950">
+      <TankScene environment={SCENE_ENVIRONMENT[environment]} showToolbar={false} />
 
-      <dl className="absolute left-3 top-3 grid grid-cols-[auto_auto] gap-x-3 gap-y-1 rounded border border-gunmetal-700 bg-gunmetal-900/80 px-3 py-2 font-mono text-[11px] backdrop-blur">
+      <dl className="pointer-events-none absolute left-3 top-3 grid grid-cols-[auto_auto] gap-x-3 gap-y-1 rounded border border-gunmetal-700 bg-gunmetal-900/80 px-3 py-2 font-mono text-[11px] backdrop-blur">
         <dt className="text-gunmetal-400">{t.viewport.mode}</dt>
         <dd className="text-olive-300">{t.modes[mode].label}</dd>
         <dt className="text-gunmetal-400">{t.viewport.environment}</dt>
